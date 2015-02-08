@@ -1,15 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MoveToTransform.cs">
     <Files>
-      <File FileName="Assets/Scripts/MoveToTransform.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CardController.cs" Line="68" Column="30" />
-      <File FileName="Assets/Scripts/MoveCardWithMouse.cs" Line="7" Column="1" />
-      <File FileName="Assets/Scripts/ExpandCardPreviewAnimation.cs" Line="23" Column="23" />
-      <File FileName="Assets/Scripts/Util.cs" Line="20" Column="1" />
       <File FileName="Assets/Scripts/HighlightTile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="84" Column="1" />
+      <File FileName="Assets/Scripts/TileController.cs" Line="64" Column="39" />
       <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/AttackTile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerDamageAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TileDamageAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MoveToTransform.cs" Line="17" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

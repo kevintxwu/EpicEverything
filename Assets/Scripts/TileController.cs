@@ -35,7 +35,7 @@ public class TileController : MonoBehaviour {
 		gameObject.GetComponent<TileDamageAnimation>().Animate(damage, other);
 		if (cardState == null) playerController.ReceiveDamage(damage);
 		else {
-			cardState.health -= damage;
+//			cardState.health -= damage;
 			if (cardState.health <= 0) {
 				gameObject.GetComponent<TileDeathAnimation>().Animate();
 				MinionDeath();
@@ -61,5 +61,6 @@ public class TileController : MonoBehaviour {
 	void Start () {
 		cardState = null;
 		gameController = Camera.main.GetComponent<GameController>();
+		renderer.material = defaultMaterial;
 	}
 }
