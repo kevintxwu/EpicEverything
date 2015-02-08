@@ -22,7 +22,7 @@ public class HighlightTile : MonoBehaviour {
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(card.gameObject.transform.position, Vector3.down, out hit, rayDepth, tileLayer)) {
 			TileController tile = hit.collider.gameObject.GetComponent<TileController>();
-			if (tile == playerController.highlightedTile) return;
+			if (tile == playerController.highlightedTile || tile.playerController != playerController) return;
 			playerController.HighlightTile(tile);
 		} else {
 			playerController.UnhighlightTile();

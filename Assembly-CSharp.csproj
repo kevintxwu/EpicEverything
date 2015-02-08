@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{99E9C9AD-937D-E4A9-DF50-AE34478454AD}</ProjectGuid>
+	<ProjectGuid>{08F99862-B842-EE66-79EA-4291F9D47436}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,13 +46,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ArrowController.cs" />
      <Compile Include="Assets\Elementals\Scripts\OrbitCamera.cs" />
      <Compile Include="Assets\Elementals\Scripts\TestParticles.cs" />
+     <Compile Include="Assets\ElevatePiece.cs" />
+     <Compile Include="Assets\MoveArrowWithMouse.cs" />
+     <Compile Include="Assets\RotateCamera.cs" />
      <Compile Include="Assets\Scripts\AttackTile.cs" />
      <Compile Include="Assets\Scripts\CardController.cs" />
+     <Compile Include="Assets\Scripts\ExpandCardPreviewAnimation.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Hexagon.cs" />
-     <Compile Include="Assets\Scripts\HighlightOnMouseover.cs" />
      <Compile Include="Assets\Scripts\HighlightTile.cs" />
      <Compile Include="Assets\Scripts\MoveCardWithMouse.cs" />
      <Compile Include="Assets\Scripts\MoveToTransform.cs" />

@@ -53,25 +53,10 @@ public class TileController : MonoBehaviour {
 		renderer.material = defaultMaterial;
 	}
 
-//	void Attack(GameObject other) {
-//		CardState otherCardState = other.GetComponent<TileScript>().cardState;
-//		if (otherCardState == null) 
-//		otherCardState.health -= cardState.attack;
-//		cardState.health -= otherCardState.attack;
-//		if (cardState.health <= 0) {
-//			Remove();
-//		}
-//		if (otherCardState.health <= 0) {
-//			Remove();
-//		}
-//		
-//	}
-
 	void Remove() {
 		//TODO
 		return;
 	}
-	
 	
 	void Start () {
 		cardState = null;

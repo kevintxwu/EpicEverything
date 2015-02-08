@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
 	private PlayerController p2Controller;
 
 	public void Attack(TileController attacker, TileController defender) {
+		print("attack");
 		CardState attackerCardState = attacker.cardState;
 		CardState defenderCardState = defender.cardState;
 		if (defenderCardState != null && (AdjacentTile(attacker, defender) || defenderCardState.ranged)) {

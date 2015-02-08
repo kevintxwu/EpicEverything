@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public static class Util {
+
+	// consts
+	public static float CardHeight = 10;
 	
 	public static float[] Linspace(float start, float end, int num) {
 		float interval = (end - start) / (num - 1);

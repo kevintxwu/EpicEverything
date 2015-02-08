@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void HighlightTile(TileController tile) {
+		print("highlight tile");
 		UnhighlightTile();
 		highlightedTile = tile;
 		tile.Highlight();
@@ -80,7 +81,6 @@ public class PlayerController : MonoBehaviour {
 		// animation here
 		if (!deckEnumerator.MoveNext()) {
 			// TODO fatigue here?
-			print ("out of cards");
 			return;
 		}
 		cardModel.GetComponent<CardController>().cardState = deckEnumerator.Current;
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < numCards; i++) {
 			Quaternion rotation = Quaternion.Euler(90, linspace[i], 0);
 			Vector3 position = (Quaternion.Euler(0, linspace[i], 0) * new Vector3(0, 0, length)) + pivot;
-			position.y = y - 0.05f * i;
+			position.y = y + 0.5f * i;
 			CardController card = playerState.hand[i];
 			if (card != selectedCard) card.MoveInHand(position, rotation);
 			else card.MoveInHandOnDrop(position, rotation);

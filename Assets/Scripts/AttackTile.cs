@@ -6,15 +6,15 @@ public class AttackTile : MonoBehaviour {
 	const int tileLayer = 1 << 8;
 
 	private TileController tileController;
-	private int rayDepth = 10;
+	private ArrowController arrow;
+	private int rayDepth = 100;
 	
 	void Awake() {
 		tileController = gameObject.GetComponent<TileController>();
 	}
 	
 	void OnMouseUp() {
-		print("Mouseup");
-		print(tileController.cardState);
+		Destroy(arrow.gameObject);
 		if (tileController.cardState == null ||
 				tileController.cardState.time + tileController.lastAttackTime > Time.time) {
 			return;
@@ -22,16 +22,12 @@ public class AttackTile : MonoBehaviour {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(ray, out hit, rayDepth, tileLayer)) {
-			print("hit");
 			TileController tile = hit.collider.gameObject.GetComponent<TileController>();
 			if (tile.playerController != tileController.playerController) tileController.Attack(tile);
-		}
-		else {
-			print("miss");
 		}
 	}
 	
 	void OnMouseDown() {
-		print("Mousedown");
+		arrow = ArrowController.Create(transform.position);
 	}
 }

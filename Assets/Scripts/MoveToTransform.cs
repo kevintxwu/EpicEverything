@@ -10,13 +10,13 @@ public class MoveToTransform : MonoBehaviour {
 	private float velocity;
 	private float angularVelocity;
 
-	public void Move(Vector3 position, Quaternion rotation, float time) {
+	public void Move(Vector3 position, Quaternion rotation, float duration) {
 		moving = true;
-		velocity = Vector3.Distance(position, gameObject.transform.position) / time;
-		angularVelocity = Quaternion.Angle(rotation, gameObject.transform.rotation) / time;
+		velocity = Vector3.Distance(position, gameObject.transform.position) / duration;
+		angularVelocity = Quaternion.Angle(rotation, gameObject.transform.rotation) / duration;
 		this.position = position;
 		this.rotation = rotation;
-	}
+	}	
 	
 	void Update () {
 		if (moving) {
@@ -30,5 +30,4 @@ public class MoveToTransform : MonoBehaviour {
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, angularStep);
 		}
 	}
-
 }
