@@ -9,40 +9,38 @@ public class GameState {
 
 public class GameController : MonoBehaviour {
 
-	public GameState gameState;
-	
-	private PlayerController p1Controller;
-	private PlayerController p2Controller;
+    public GameState gameState;
 
-	public void Attack(TileController attacker, TileController defender) {
-		print("attack");
-		CardState attackerCardState = attacker.cardState;
-		CardState defenderCardState = defender.cardState;
-		if (defenderCardState != null && (AdjacentTile(attacker, defender) || defenderCardState.ranged)) {
-			// deal retaliation damage
-			attacker.ReceiveDamage(defenderCardState.attack, defender);
-		}
-		defender.ReceiveDamage(attackerCardState.attack, attacker);
-	}
-	
-	public void DrawCard() {
-		p1Controller.DrawCard();
-		p2Controller.DrawCard();
-	}
-	
-	public void NewTurn() {
-		p1Controller.NewTurn();
-		p2Controller.NewTurn();
-	}
-	
+    private PlayerController p1Controller;
+    private PlayerController p2Controller;
 
-	void Start () {
-		p1Controller = GameObject.Find("Player1").GetComponent<PlayerController>();
-		p2Controller = GameObject.Find("Player2").GetComponent<PlayerController>();
-	}
+    public void Attack(PieceController attacker, PieceController defender) {
+        CardState attackerCardState = attacker.cardState;
+        CardState defenderCardState = defender.cardState;
+        if (defenderCardState != null && (AdjacentPiece(attacker, defender) || defenderCardState.ranged)) {
+            // deal retaliation damage
+            attacker.ReceiveDamage(defenderCardState.attack, defender);
+        }
+        defender.ReceiveDamage(attackerCardState.attack, attacker);
+    }
 
-	
-	bool AdjacentTile(TileController a, TileController b) {
-		return true;
-	}
+    public void DrawCard() {
+        p1Controller.DrawCard();
+        p2Controller.DrawCard();
+    }
+
+    public void NewTurn() {
+        p1Controller.NewTurn();
+        p2Controller.NewTurn();
+    }
+    
+
+    void Start () {
+        p1Controller = GameObject.Find("Player1").GetComponent<PlayerController>();
+        p2Controller = GameObject.Find("Player2").GetComponent<PlayerController>();
+    }
+
+    private bool AdjacentPiece(PieceController a, PieceController b) {
+        return true;
+    }
 }

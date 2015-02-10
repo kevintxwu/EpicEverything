@@ -3,75 +3,91 @@ using System.Collections;
 
 [System.Serializable]
 public class CardState {
-	public int attack;
-	public int health;
-	public int time;
-	public int cost;
-	public bool ranged;
-	public bool speed;
-	public bool block;
-	
-	// temporary
-	public Material cardMaterial;
-	public Material tileMaterial;
+    public int attack;
+    public int health;
+    public int time;
+    public int cost;
+    public bool ranged;
+    public bool speed;
+    public bool block;
+
+    // temporary
+    public Material cardMaterial;
+    public Material pieceMaterial;
 }
 
 public class CardController : MonoBehaviour {
 
-	Quaternion baseRotation = Quaternion.Euler(90, 0, 0);
-	
-	public CardState cardState;
-	public float repositionTime;
-	public float returnTime;
-	
-	private PlayerController playerController;
-	private MoveToTransform mover;
-	private Vector3 position;
-	private Quaternion rotation;
+    Quaternion baseRotation = Quaternion.Euler(270, 180, 0);
 
-	public void DropCard() {
-		playerController.DropCard(this);
-	}
+    public CardState cardState;
+    public float repositionTime;
+    public float returnTime;
 
-	public void PickupCard() {
-		position = mover.position;
-		rotation = mover.rotation;
-		transform.rotation = baseRotation;
-		playerController.PickupCard(this);
-	}
-	
-	public void MoveInHand(Vector3 position, Quaternion rotation) {
-		MoveToTransform(position, rotation, repositionTime);
-	}
+    public bool selected {get; private set;}
 
-	public void MoveInHandOnDrop(Vector3 position, Quaternion rotation) {
-		this.position = position;
-		this.rotation = rotation;
-	}
+    private PlayerController player;
+    private MoveToTransform mover;
+    private Vector3 position;
+    private Quaternion rotation;
+    private PieceController piece;
 
-	public void ReturnToHand() {
-		MoveToTransform(position, rotation, returnTime);
-	}
+    public void PickupCard() {
+        position = mover.position;
+        rotation = mover.rotation;
+        mover.moving = false;
+        transform.rotation = baseRotation;
+        selected = true;
+    }
 
-	public bool IsSelected() {
-		if (playerController == null) return false;
-		return playerController.selectedCard == this;
-	}
+    public void PlayCard(PieceController piece) {
+        player.RemoveCardFromHand(this);
+        this.piece = piece;
+        selected = false;
+        gameObject.GetComponent<CardPlayAnimation>().Animate(piece, cardState.cost);
+    }
 
-	public void SetPlayerController(PlayerController playerController) {
-		this.playerController = playerController;
-	}
+    public bool IsPlayable(PieceController piece) {
+        if (piece.cardState != null ||
+            piece.player != player ||
+            player.playerState.gold < cardState.cost) return false;
+        return true;
+    }
 
-	void Awake() {
-		renderer.material = cardState.cardMaterial;
-		mover = gameObject.GetComponent<MoveToTransform>();
-		transform.Find("Attack").GetComponent<TextMesh>().text = cardState.attack.ToString();
-		transform.Find("Health").GetComponent<TextMesh>().text = cardState.health.ToString();
-		transform.Find("Cost").GetComponent<TextMesh>().text = cardState.cost.ToString();
-		transform.Find("Time").GetComponent<TextMesh>().text = cardState.time.ToString();
-	}
-	
-	void MoveToTransform(Vector3 position, Quaternion rotation, float time) {
-		mover.Move(position, rotation, time);
-	}
+    public void PlayPiece() {
+        player.PlayPiece(piece, this);
+    }
+
+    public void MoveInHand(Vector3 position, Quaternion rotation) {
+        MoveToTransform(position, rotation, repositionTime);
+    }
+
+
+    public void MoveInHandOnDrop(Vector3 position, Quaternion rotation) {
+        this.position = position;
+        this.rotation = rotation;
+    }
+
+
+    public void ReturnToHand() {
+        selected = false;
+        MoveToTransform(position, rotation, returnTime);
+    }
+
+    public void SetPlayerController(PlayerController player) {
+        this.player = player;
+    }
+
+    void Awake() {
+        renderer.material = cardState.cardMaterial;
+        mover = gameObject.GetComponent<MoveToTransform>();
+        transform.Find("Attack").GetComponent<TextMesh>().text = cardState.attack.ToString();
+        transform.Find("Health").GetComponent<TextMesh>().text = cardState.health.ToString();
+        transform.Find("Cost").GetComponent<TextMesh>().text = cardState.cost.ToString();
+        transform.Find("Time").GetComponent<TextMesh>().text = cardState.time.ToString();
+    }
+
+    void MoveToTransform(Vector3 position, Quaternion rotation, float time) {
+        mover.Move(position, rotation, time);
+    }
 }

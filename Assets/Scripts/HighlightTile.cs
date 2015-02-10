@@ -1,31 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HighlightTile : MonoBehaviour {
-	
-	const int tileLayer = 1 << 8;
-	
-	public float rayDepth;
-	
-	private PlayerController playerController;
-	
-	void Start() {
-		playerController = gameObject.GetComponent<PlayerController>();
-	}
-	
-	void Update () {
-		CardController card = playerController.selectedCard;
-		if (card == null) {
-			playerController.UnhighlightTile();
-			return;
-		}
-		RaycastHit hit = new RaycastHit();
-		if (Physics.Raycast(card.gameObject.transform.position, Vector3.down, out hit, rayDepth, tileLayer)) {
-			TileController tile = hit.collider.gameObject.GetComponent<TileController>();
-			if (tile == playerController.highlightedTile || tile.playerController != playerController) return;
-			playerController.HighlightTile(tile);
-		} else {
-			playerController.UnhighlightTile();
-		}
-	}
+public class HighlightPiece : MonoBehaviour {
+
+    private PlayerController player;
+
+    // void Start() {
+    //     player = gameObject.GetComponent<PlayerController>();
+    // }
+
+    // void Update () {
+    //     CardController card = player.selectedCard;
+    //     if (card == null) {
+    //         player.UnhighlightPiece();
+    //         return;
+    //     }
+    //     RaycastHit hit = new RaycastHit();
+    //     if (Physics.Raycast(card.gameObject.transform.position,
+    //                         Vector3.down,
+    //                         out hit,
+    //                         Util.RayDepth,
+    //                         Util.PieceLayer)) {
+    //         PieceController piece = hit.collider.gameObject.GetComponent<PieceController>();
+    //         if (piece == player.highlightedPiece ||
+    //             piece.player != player) return;
+    //         player.HighlightPiece(piece);
+    //     } else player.UnhighlightPiece();
+    // }
 }
