@@ -8,12 +8,13 @@ public class PiecePlayAnimation : MonoBehaviour {
     private ParticleSystem crackParticle;
 
     public void Animate(CardState cardState) {
-        int cost = 10;//Mathf.Min(cardState.cost, 10);
+        int cost = Mathf.Min(cardState.cost, 10);
         dustParticle.Emit(cost * 100);
         smokeParticle.startSize = cost * 4 + 20;
         smokeParticle.Emit(cost * 10);
         crackParticle.startSize = cost * 10 + 50;
         crackParticle.Emit(1);
+        print(cardState.pieceMaterial);
         renderer.material = cardState.pieceMaterial;
     }
 

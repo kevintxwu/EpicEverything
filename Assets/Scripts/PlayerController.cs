@@ -13,6 +13,7 @@ public class PlayerState {
 public class PlayerController : MonoBehaviour {
 
     const int maxGold = 10;
+    const int maxHealth = 10;
 
     public PlayerState playerState;
     
@@ -29,26 +30,19 @@ public class PlayerController : MonoBehaviour {
     private PlayerDamageAnimation damageAnimation;
     private PlayerDeathAnimation deathAnimation;
 
-    public void PlayPiece(PieceController piece, CardController card) {
-        playerState.gold -= card.cardState.cost;
-        piece.PlayCard(card.cardState);
-        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
-    }
-
-    public void RemoveCardFromHand(CardController card) {
+    public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
+        UpdateGold(playerState.gold - card.cardState.cost);
         UpdateHandPosition();
     }
 
     public void ReceiveDamage(int damage) {
-        playerState.health -= damage;
+        UpdateHealth(playerState.health - damage);
         gameObject.GetComponent<PlayerDamageAnimation>().Animate(damage);
-        transform.Find("Health").GetComponent<TextMesh>().text = playerState.health.ToString();
         if (playerState.health <= 0) {
             gameObject.GetComponent<PlayerDeathAnimation>().Animate();
             // TODO end game here
         }
-        
     }
 
     public void DrawCard() {
@@ -64,28 +58,39 @@ public class PlayerController : MonoBehaviour {
 
     public void NewTurn() {
         turn += 1;
-        ResetGold();
+        UpdateGold(turn);
         DrawCard();
     }
 
     void Awake() {
         Util.Shuffle(playerState.deck);
         this.deckEnumerator = playerState.deck.GetEnumerator();
-        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
-        transform.Find("Health").GetComponent<TextMesh>().text = playerState.health.ToString();
         damageAnimation = gameObject.GetComponent<PlayerDamageAnimation>();
         deathAnimation = gameObject.GetComponent<PlayerDeathAnimation>();
+        UpdateGold(0);
+    }
+
+    void UpdateGold(int amount) {
+        playerState.gold = Mathf.Min(maxGold, amount);
+        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
+        for (int i = 0; i < playerState.hand.Count; i++) {
+            CardController card = playerState.hand[i];
+            if (card.cardState.cost > playerState.gold) card.HideOutline();
+            else card.ShowOutline();
+        }
+    }
+
+    void UpdateHealth(int amount) {
+        playerState.health = Mathf.Min(maxHealth, amount);
+        transform.Find("Health").GetComponent<TextMesh>().text = playerState.health.ToString();
     }
 
     void AddCardToHand(CardController card) {
         playerState.hand.Add(card);
         card.SetPlayerController(this);
+        if (card.cardState.cost > playerState.gold) card.HideOutline();
+        else card.ShowOutline();
         UpdateHandPosition();
-    }
-    
-    void ResetGold() {
-        playerState.gold = Mathf.Min(maxGold, turn);
-        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
     }
     
     void UpdateHandPosition() {

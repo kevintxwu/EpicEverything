@@ -30,7 +30,6 @@ public class CardController : MonoBehaviour {
     private MoveToTransform mover;
     private Vector3 position;
     private Quaternion rotation;
-    private PieceController piece;
 
     public void PickupCard() {
         position = mover.position;
@@ -41,8 +40,7 @@ public class CardController : MonoBehaviour {
     }
 
     public void PlayCard(PieceController piece) {
-        player.RemoveCardFromHand(this);
-        this.piece = piece;
+        player.PlayCard(this);
         selected = false;
         gameObject.GetComponent<CardPlayAnimation>().Animate(piece, cardState.cost);
     }
@@ -52,10 +50,6 @@ public class CardController : MonoBehaviour {
             piece.player != player ||
             player.playerState.gold < cardState.cost) return false;
         return true;
-    }
-
-    public void PlayPiece() {
-        player.PlayPiece(piece, this);
     }
 
     public void MoveInHand(Vector3 position, Quaternion rotation) {
@@ -68,7 +62,6 @@ public class CardController : MonoBehaviour {
         this.rotation = rotation;
     }
 
-
     public void ReturnToHand() {
         selected = false;
         MoveToTransform(position, rotation, returnTime);
@@ -76,6 +69,14 @@ public class CardController : MonoBehaviour {
 
     public void SetPlayerController(PlayerController player) {
         this.player = player;
+    }
+
+    public void ShowOutline() {
+        transform.Find("OutlineParticle").gameObject.active = true;
+    }
+
+    public void HideOutline() {
+        transform.Find("OutlineParticle").gameObject.active = false;
     }
 
     void Awake() {

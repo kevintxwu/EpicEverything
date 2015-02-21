@@ -28,7 +28,7 @@ public class MoveCardWithMouse : MonoBehaviour {
     void OnMouseUp () {
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(
-                transform.position, Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {
+            transform.position, Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {
             PieceController piece = hit.collider.gameObject.GetComponent<PieceController>();
             if (card.IsPlayable(piece)) {
                 card.PlayCard(piece);

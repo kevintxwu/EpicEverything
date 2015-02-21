@@ -13,14 +13,6 @@ public class PieceController : MonoBehaviour {
 
     public float lastAttackTime {get; private set;}
 
-    public void Unhighlight() {
-        //transform.Find("Outline").gameObject.SetActive(false);
-    }
-    
-    public void Highlight() {
-        //transform.Find("Outline").gameObject.SetActive(true);
-    }
-
     public void PlayCard(CardState cardState) {
         this.cardState = cardState;
         lastAttackTime = Time.time;
@@ -28,31 +20,30 @@ public class PieceController : MonoBehaviour {
         gameObject.GetComponent<PiecePlayAnimation>().Animate(cardState);
     }
 
-    public void ReceiveDamage(int damage, PieceController other) {
+    public void ReceiveCreatureDamage(int damage, PieceController other) {
         gameObject.GetComponent<PieceDamageAnimation>().Animate(damage, other);
         if (cardState == null) player.ReceiveDamage(damage);
         else {
-            // cardState.health -= damage;
-            if (cardState.health <= 0) {
-                gameObject.GetComponent<PieceDeathAnimation>().Animate();
-                MinionDeath();
-            }
+            cardState.health -= damage;
+            if (cardState.health <= 0) PieceDeath();
         }
     }
-    
+
+    public void ReceiveSpellDamage(int damage) {
+        //TODO
+    }
+
     public void Attack(PieceController other) {
         lastAttackTime = Time.time;
         game.Attack(this, other);
     }
     
-    public void MinionDeath() {
-        cardState = null;
-        renderer.material = defaultMaterial;
+    public void ShowOutline() {
+        transform.Find("OutlineParticle").gameObject.active = true;
     }
 
-    void Remove() {
-        //TODO
-        return;
+    public void HideOutline() {
+        transform.Find("OutlineParticle").gameObject.active = false;
     }
 
     void Awake() {
@@ -60,4 +51,12 @@ public class PieceController : MonoBehaviour {
         game = Camera.main.GetComponent<GameController>();
         renderer.material = defaultMaterial;
     }
+
+    public void PieceDeath() {
+        cardState = null;
+        HideOutline();
+        gameObject.GetComponent<PieceDeathAnimation>().Animate();
+        gameObject.GetComponent<PieceAttackAnimation>().DestroyArrow();
+    }
+
 }

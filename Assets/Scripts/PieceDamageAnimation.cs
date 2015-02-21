@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PieceDamageAnimation : MonoBehaviour {
 
+    private int damage = 10;
     private Vector3 defaultPosition;
     private Quaternion defaultRotation;
     private float endAnimationTime;
@@ -11,8 +12,6 @@ public class PieceDamageAnimation : MonoBehaviour {
     private ParticleSystem flashParticle;
     private ParticleSystem dustParticle;
     private ParticleSystem impactParticle;
-
-    public int damage;
 
     public void Animate(int d, PieceController other) {
         Vector3 positionDiff = transform.position - other.transform.position;

@@ -46,26 +46,24 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ArrowController.cs" />
      <Compile Include="Assets\Elementals\Scripts\OrbitCamera.cs" />
      <Compile Include="Assets\Elementals\Scripts\TestParticles.cs" />
-     <Compile Include="Assets\ElevatePiece.cs" />
-     <Compile Include="Assets\MoveArrowWithMouse.cs" />
-     <Compile Include="Assets\Scripts\AttackTile.cs" />
+     <Compile Include="Assets\Scripts\ArrowController.cs" />
      <Compile Include="Assets\Scripts\CardController.cs" />
-     <Compile Include="Assets\Scripts\ExpandCardPreviewAnimation.cs" />
+     <Compile Include="Assets\Scripts\CardPlayAnimation.cs" />
+     <Compile Include="Assets\Scripts\CardPreviewAnimation.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\Hexagon.cs" />
-     <Compile Include="Assets\Scripts\HighlightTile.cs" />
      <Compile Include="Assets\Scripts\MoveCardWithMouse.cs" />
      <Compile Include="Assets\Scripts\MoveToTransform.cs" />
-     <Compile Include="Assets\Scripts\PlayCardAnimation.cs" />
+     <Compile Include="Assets\Scripts\PieceAttackAnimation.cs" />
+     <Compile Include="Assets\Scripts\PieceController.cs" />
+     <Compile Include="Assets\Scripts\PieceDamageAnimation.cs" />
+     <Compile Include="Assets\Scripts\PieceDeathAnimation.cs" />
+     <Compile Include="Assets\Scripts\PieceOutline.cs" />
+     <Compile Include="Assets\Scripts\PiecePlayAnimation.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerDamageAnimation.cs" />
      <Compile Include="Assets\Scripts\PlayerDeathAnimation.cs" />
-     <Compile Include="Assets\Scripts\TileController.cs" />
-     <Compile Include="Assets\Scripts\TileDamageAnimation.cs" />
-     <Compile Include="Assets\Scripts\TileDeathAnimation.cs" />
      <Compile Include="Assets\Scripts\TurnTimerScript.cs" />
      <Compile Include="Assets\Scripts\Util.cs" />
      <None Include="Assets\Elementals\!Readme.txt" />
