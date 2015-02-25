@@ -17,11 +17,12 @@ public class GameController : MonoBehaviour {
     public void Attack(PieceController attacker, PieceController defender) {
         CardState attackerCardState = attacker.cardState;
         CardState defenderCardState = defender.cardState;
+        defender.ReceiveCreatureDamage(attackerCardState.attack, attacker);
         if (defenderCardState != null && (AdjacentPiece(attacker, defender) || defenderCardState.ranged)) {
             // deal retaliation damage
             attacker.ReceiveCreatureDamage(defenderCardState.attack, defender);
         }
-        defender.ReceiveCreatureDamage(attackerCardState.attack, attacker);
+        gameObject.GetComponent<CameraShakeAnimation>().Animate(attackerCardState.attack);
     }
 
     public void DrawCard() {

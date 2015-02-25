@@ -49,6 +49,7 @@
      <Compile Include="Assets\Elementals\Scripts\OrbitCamera.cs" />
      <Compile Include="Assets\Elementals\Scripts\TestParticles.cs" />
      <Compile Include="Assets\Scripts\ArrowController.cs" />
+     <Compile Include="Assets\Scripts\CameraShakeAnimation.cs" />
      <Compile Include="Assets\Scripts\CardController.cs" />
      <Compile Include="Assets\Scripts\CardPlayAnimation.cs" />
      <Compile Include="Assets\Scripts\CardPreviewAnimation.cs" />

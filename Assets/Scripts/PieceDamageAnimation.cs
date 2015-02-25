@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PieceDamageAnimation : MonoBehaviour {
 
-    private int damage = 10;
     private Vector3 defaultPosition;
     private Quaternion defaultRotation;
     private float endAnimationTime;
@@ -13,7 +12,7 @@ public class PieceDamageAnimation : MonoBehaviour {
     private ParticleSystem dustParticle;
     private ParticleSystem impactParticle;
 
-    public void Animate(int d, PieceController other) {
+    public void Animate(int damage, PieceController other) {
         Vector3 positionDiff = transform.position - other.transform.position;
         positionDiff.y = 0;
         float angle = Mathf.Atan(positionDiff.x / positionDiff.z) * Mathf.Rad2Deg;
@@ -30,10 +29,10 @@ public class PieceDamageAnimation : MonoBehaviour {
         dustParticle.Emit((int) Mathf.Pow(damage, 2) * 20);
 
         positionDiff.Normalize();
-        Vector3 force = (damage + 5) * 200 * Vector3.up;
-        Vector3 position = new Vector3 (transform.position.x + 6.9f * positionDiff.x + Random.Range(-2f, 2f), 
+        Vector3 force = (150 * damage + 1500) * Vector3.up;
+        Vector3 position = new Vector3 (transform.position.x + 6.9f * positionDiff.x + Random.Range(-5f, 5f), 
                                         0, 
-                                        transform.position.z + 6.9f * positionDiff.z + Random.Range(-2f, 2f));
+                                        transform.position.z + 6.9f * positionDiff.z + Random.Range(-5f, 5f));
         rigidbody.AddForceAtPosition(force, position);
         endAnimationTime = Time.time + 3;
     }

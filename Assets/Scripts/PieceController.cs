@@ -6,6 +6,7 @@ public class PieceController : MonoBehaviour {
     public CardState cardState {get; private set;}
     
     private GameController game;
+    private ParticleSystem outlineParticle;
     // temp
     public PlayerController player;
     // temp
@@ -39,16 +40,17 @@ public class PieceController : MonoBehaviour {
     }
     
     public void ShowOutline() {
-        transform.Find("OutlineParticle").gameObject.active = true;
+        outlineParticle.gameObject.active = true;
     }
 
     public void HideOutline() {
-        transform.Find("OutlineParticle").gameObject.active = false;
+        outlineParticle.gameObject.active = false;
     }
 
     void Awake() {
         cardState = null;
         game = Camera.main.GetComponent<GameController>();
+        outlineParticle = transform.parent.transform.Find("OutlineParticle").gameObject.particleSystem;
         renderer.material = defaultMaterial;
     }
 
