@@ -22,7 +22,7 @@ public class PieceController : MonoBehaviour {
     }
 
     public void ReceiveCreatureDamage(int damage, PieceController other) {
-        gameObject.GetComponent<PieceDamageAnimation>().Animate(damage, other);
+        gameObject.GetComponent<PieceDamageAnimation>().Animate(damage, other, cardState);
         if (cardState == null) player.ReceiveDamage(damage);
         else {
             cardState.health -= damage;

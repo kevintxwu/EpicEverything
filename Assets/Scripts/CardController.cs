@@ -72,7 +72,7 @@ public class CardController : MonoBehaviour {
     }
 
     public void ShowOutline() {
-        transform.Find("OutlineParticle").gameObject.active = true;
+        /*transform.Find("OutlineParticle").gameObject.active = true;*/
     }
 
     public void HideOutline() {

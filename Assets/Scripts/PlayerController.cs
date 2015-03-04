@@ -73,11 +73,12 @@ public class PlayerController : MonoBehaviour {
     void UpdateGold(int amount) {
         playerState.gold = Mathf.Min(maxGold, amount);
         transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
-        for (int i = 0; i < playerState.hand.Count; i++) {
+        /*for (int i = 0; i < playerState.hand.Count; i++) {
             CardController card = playerState.hand[i];
             if (card.cardState.cost > playerState.gold) card.HideOutline();
             else card.ShowOutline();
-        }
+        }*/
+		playerState.gold = 100;
     }
 
     void UpdateHealth(int amount) {
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour {
     void UpdateHandPosition() {
         // reposition all cards
         int numCards = playerState.hand.Count;
-        float angle = spacing / 2 * (numCards - 1);
+        float angle = spacing / 10 * (numCards - 1);
         if (angle > handAngle) angle = handAngle;
         float[] linspace = Util.Linspace(-angle, angle, numCards);
         float y = 10;

@@ -4,6 +4,7 @@ using System.Collections;
 public class PieceOutline : MonoBehaviour {
 
     private PieceController piece;
+	private bool attacking = false;
 
     void Start() {
         piece = gameObject.GetComponent<PieceController>();
@@ -22,7 +23,16 @@ public class PieceOutline : MonoBehaviour {
         if (piece.cardState != null) piece.ShowOutline(); 
     }
 
+	void OnMouseDown() {
+		attacking = true;
+	}
+
     void OnMouseExit() {
-        piece.HideOutline();
+		if (!attacking) piece.HideOutline();
     }
+
+	void OnMouseUp() {
+		attacking = false;
+		piece.HideOutline();
+	}
 }

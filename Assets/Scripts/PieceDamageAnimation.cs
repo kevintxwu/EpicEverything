@@ -12,7 +12,12 @@ public class PieceDamageAnimation : MonoBehaviour {
     private ParticleSystem dustParticle;
     private ParticleSystem impactParticle;
 
-    public void Animate(int damage, PieceController other) {
+    public void Animate(int damage, PieceController other, CardState cardState) {
+		if (cardState == null) {
+			rockParticle.renderer.material = Resources.Load("gray_rock") as Material;
+		} else {
+			rockParticle.renderer.material = Resources.Load("rock") as Material;
+		}
         Vector3 positionDiff = transform.position - other.transform.position;
         positionDiff.y = 0;
         float angle = Mathf.Atan(positionDiff.x / positionDiff.z) * Mathf.Rad2Deg;

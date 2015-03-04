@@ -21,17 +21,23 @@ public class CardPreviewAnimation : MonoBehaviour {
 
     void OnMouseExit() {
         ShowNormalCard();
+		transform.Find("OutlineParticle").gameObject.active = false;
     }
 
     void OnMouseDown() {
         ShowNormalCard();
+		transform.Find("OutlineParticle").gameObject.active = true;
     }
+
+	void OnMouseUp() {
+		transform.Find ("OutlineParticle").gameObject.active = false;
+	}
 
     private void ShowExpandedCard() {
         expandedCardObject = GenerateExpandedCard();
         renderer.enabled = false;
         foreach (Renderer r in GetComponentsInChildren(typeof(Renderer))) r.enabled = false;
-        transform.Find("OutlineParticle").particleSystem.renderer.enabled = false;
+		transform.Find("OutlineParticle").particleSystem.renderer.enabled = true;
     }
 
     private void ShowNormalCard() {
@@ -46,7 +52,9 @@ public class CardPreviewAnimation : MonoBehaviour {
         Vector3 position = new Vector3(transform.position.x, Util.CardHeight, cardSpawnPosition);
         GameObject cardObject = Instantiate(gameObject, position, Util.CardRotation) as GameObject;
         Destroy(cardObject.collider);
+		cardObject.transform.Find("OutlineParticle").gameObject.active = true;
         cardObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		cardObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         return cardObject;
     }
 }
