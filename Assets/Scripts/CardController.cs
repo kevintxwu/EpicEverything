@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 [System.Serializable]
 public class CardState {
@@ -82,10 +83,10 @@ public class CardController : MonoBehaviour {
     void Awake() {
         renderer.material = cardState.cardMaterial;
         mover = gameObject.GetComponent<MoveToTransform>();
-        transform.Find("Attack").GetComponent<TextMesh>().text = cardState.attack.ToString();
-        transform.Find("Health").GetComponent<TextMesh>().text = cardState.health.ToString();
-        transform.Find("Cost").GetComponent<TextMesh>().text = cardState.cost.ToString();
-        transform.Find("Time").GetComponent<TextMesh>().text = cardState.time.ToString();
+        transform.Find("Attack").GetComponent<TextMeshPro>().text = cardState.attack.ToString();
+        transform.Find("Health").GetComponent<TextMeshPro>().text = cardState.health.ToString();
+        transform.Find("Cost").GetComponent<TextMeshPro>().text = cardState.cost.ToString();
+        transform.Find("Time").GetComponent<TextMeshPro>().text = cardState.time.ToString();
     }
 
     void MoveToTransform(Vector3 position, Quaternion rotation, float time) {

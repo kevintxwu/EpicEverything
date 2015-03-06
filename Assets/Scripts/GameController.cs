@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
             // deal retaliation damage
             attacker.ReceiveCreatureDamage(defenderCardState.attack, defender);
         }
-        gameObject.GetComponent<CameraShakeAnimation>().Animate(attackerCardState.attack);
+        GetComponent<CameraShakeAnimation>().Animate(attackerCardState.attack);
     }
 
     public void DrawCard() {

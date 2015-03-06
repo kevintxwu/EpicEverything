@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class PieceController : MonoBehaviour {
 
@@ -7,6 +8,8 @@ public class PieceController : MonoBehaviour {
     
     private GameController game;
     private ParticleSystem outlineParticle;
+    private TextMeshPro attackText;
+    private TextMeshPro healthText;
     // temp
     public PlayerController player;
     // temp
@@ -19,6 +22,8 @@ public class PieceController : MonoBehaviour {
         lastAttackTime = Time.time;
         if (cardState.speed) lastAttackTime = Time.time - cardState.time;
         gameObject.GetComponent<PiecePlayAnimation>().Animate(cardState);
+        UpdateCardHealth();
+        UpdateCardAttack();
     }
 
     public void ReceiveCreatureDamage(int damage, PieceController other) {
@@ -26,6 +31,7 @@ public class PieceController : MonoBehaviour {
         if (cardState == null) player.ReceiveDamage(damage);
         else {
             cardState.health -= damage;
+            UpdateCardHealth();
             if (cardState.health <= 0) PieceDeath();
         }
     }
@@ -47,18 +53,30 @@ public class PieceController : MonoBehaviour {
         outlineParticle.gameObject.active = false;
     }
 
-    void Awake() {
-        cardState = null;
-        game = Camera.main.GetComponent<GameController>();
-        outlineParticle = transform.parent.transform.Find("OutlineParticle").gameObject.particleSystem;
-        renderer.material = defaultMaterial;
-    }
-
     public void PieceDeath() {
         cardState = null;
         HideOutline();
         gameObject.GetComponent<PieceDeathAnimation>().Animate();
         gameObject.GetComponent<PieceAttackAnimation>().DestroyArrow();
+    }
+
+    void Awake() {
+        cardState = null;
+        game = Camera.main.GetComponent<GameController>();
+        outlineParticle = transform.parent.transform.Find("OutlineParticle").gameObject.particleSystem;
+        renderer.material = defaultMaterial;
+        attackText = transform.parent.transform.Find("Attack").GetComponent<TextMeshPro>();
+        attackText.text = "";
+        healthText = transform.parent.transform.Find("Health").GetComponent<TextMeshPro>();
+        healthText.text = "";
+    }
+
+    private void UpdateCardHealth() {
+        healthText.text = cardState.health.ToString();
+    }
+
+    private void UpdateCardAttack() {
+        attackText.text = cardState.attack.ToString();
     }
 
 }

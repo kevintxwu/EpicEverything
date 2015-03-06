@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class CardPlayAnimation : MonoBehaviour {
 
@@ -14,6 +15,10 @@ public class CardPlayAnimation : MonoBehaviour {
     private bool fading;
 
     public void Animate(PieceController piece, int cost) {
+        transform.Find("Attack").GetComponent<TextMeshPro>().text = "";
+        transform.Find("Health").GetComponent<TextMeshPro>().text = "";
+        transform.Find("Cost").GetComponent<TextMeshPro>().text = "";
+        transform.Find("Time").GetComponent<TextMeshPro>().text = "";
         transform.position = new Vector3(
             piece.transform.position.x,
             piece.transform.position.y,
