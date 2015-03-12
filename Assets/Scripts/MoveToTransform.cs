@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveToTransform : MonoBehaviour {
 
-    private float precision = .01f;
+    private float precision = 1;
 
     public Vector3 position {get; private set;}
     public Quaternion rotation {get; private set;}

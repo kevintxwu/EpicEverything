@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
     }
     
 
-    void Start () {
+    void Start() {
         p1Controller = GameObject.Find("Player1").GetComponent<PlayerController>();
         p2Controller = GameObject.Find("Player2").GetComponent<PlayerController>();
     }

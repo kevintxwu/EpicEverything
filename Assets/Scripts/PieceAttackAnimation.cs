@@ -5,34 +5,34 @@ public class PieceAttackAnimation : MonoBehaviour {
 
     private PieceController piece;
     private ArrowController arrow;
-    private PieceController otherPiece;
 
     public void DestroyArrow() {
         if (arrow != null) Destroy(arrow.gameObject);
         arrow = null;
     }
 
-    public void Attack() {
-        piece.Attack(otherPiece);
-    }
-
     void Awake() {
         piece = gameObject.GetComponent<PieceController>();
     }
 
+    void FixedUpdate() {
+        if (arrow != null) {
+            arrow.UpdateTransform(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+    }
+
     void OnMouseUp() {
-        if (piece.cardState == null ||
-            piece.cardState.time + piece.lastAttackTime > Time.time) {
+        if (!piece.CanAttack()) {
             DestroyArrow();
             return;
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit = new RaycastHit();
         bool destroyArrow = true;
+        RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit, Util.RayDepth, Util.PieceLayer)) {
-            otherPiece = hit.collider.gameObject.GetComponent<PieceController>();
-            if (otherPiece.player != piece.player) {
-                arrow.Snap(otherPiece.cardState == null);
+            PieceController other = hit.collider.gameObject.GetComponent<PieceController>();
+            if (other.player != piece.player) {
+                StartCoroutine(AttackAfterSnap(other));
                 destroyArrow = false;
             }
         }
@@ -44,6 +44,12 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void CreateArrow() {
-        arrow = ArrowController.Create(transform.position, this);
+        arrow = ArrowController.Create(transform.position);
+    }
+
+    IEnumerator AttackAfterSnap(PieceController other) {
+        arrow.Snap(other.cardState == null);
+        yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
+        piece.Attack(other);
     }
 }

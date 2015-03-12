@@ -53,12 +53,12 @@ public class CardController : MonoBehaviour {
         return true;
     }
 
-    public void MoveInHand(Vector3 position, Quaternion rotation) {
+    public void Move(Vector3 position, Quaternion rotation) {
         MoveToTransform(position, rotation, repositionTime);
     }
 
 
-    public void MoveInHandOnDrop(Vector3 position, Quaternion rotation) {
+    public void MoveOnDrop(Vector3 position, Quaternion rotation) {
         this.position = position;
         this.rotation = rotation;
     }
@@ -70,6 +70,12 @@ public class CardController : MonoBehaviour {
 
     public void SetPlayerController(PlayerController player) {
         this.player = player;
+
+        // // TODO: how can we do this better...
+        // if (player.GetType() == typeof(AIController)) {
+        //     Destroy(GetComponent<CardPreviewAnimation>());
+        //     Destroy(GetComponent<MoveCardWithMouse>());
+        // }
     }
 
     public void ShowOutline() {

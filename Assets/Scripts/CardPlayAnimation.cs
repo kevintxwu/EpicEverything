@@ -21,7 +21,7 @@ public class CardPlayAnimation : MonoBehaviour {
         transform.Find("Time").GetComponent<TextMeshPro>().text = "";
         transform.position = new Vector3(
             piece.transform.position.x,
-            piece.transform.position.y,
+            Util.CardHeight,
             piece.transform.position.z - 17);
         collider.enabled = false;
         highlightParticle.emissionRate = 0;

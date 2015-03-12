@@ -40,6 +40,11 @@ public class PieceController : MonoBehaviour {
         //TODO
     }
 
+    public bool CanAttack() {
+        return (cardState != null &&
+                cardState.time + lastAttackTime <= Time.time);
+    }
+
     public void Attack(PieceController other) {
         lastAttackTime = Time.time;
         game.Attack(this, other);

@@ -12,26 +12,28 @@ public class PlayerState {
 
 public class PlayerController : MonoBehaviour {
 
-    const int maxGold = 10;
-    const int maxHealth = 10;
+    public const int maxGold = 10;
+    public const int maxHealth = 10;
 
     public PlayerState playerState;
-    
     public GameObject cardModel;
-    public Vector3 cardSpawnPosition;
-    public float handAngle;
-    public Vector3 pivot;
-    public float length;
-    public float spacing;
     
-    private List<CardState>.Enumerator deckEnumerator;
-    private int turn;
-    
-    private PlayerDamageAnimation damageAnimation;
-    private PlayerDeathAnimation deathAnimation;
+    protected List<CardState>.Enumerator deckEnumerator;
+    protected int turn;
+
+    protected Vector3 cardSpawnPosition;
+    protected float handAngle;
+    protected Vector3 pivot;
+    protected float length;
+    protected float spacing;
+    protected float xRotation;
+
+    protected PlayerDamageAnimation damageAnimation;
+    protected PlayerDeathAnimation deathAnimation;
 
     public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
+        print(playerState.hand.Count);
         UpdateGold(playerState.gold - card.cardState.cost);
         UpdateHandPosition();
     }
@@ -58,19 +60,30 @@ public class PlayerController : MonoBehaviour {
 
     public void NewTurn() {
         turn += 1;
-        UpdateGold(turn);
         DrawCard();
+        UpdateGold(turn);
     }
 
-    void Awake() {
+    protected void Awake() {
+        cardSpawnPosition = new Vector3(200, 10, -200);
+        handAngle = 15;
+        pivot = new Vector3(40, 1, -490);
+        length = 400;
+        spacing = 6;
+        xRotation = 270;
+
+        Init();
+    }
+
+    protected void Init() {
         Util.Shuffle(playerState.deck);
-        this.deckEnumerator = playerState.deck.GetEnumerator();
+        deckEnumerator = playerState.deck.GetEnumerator();
         damageAnimation = gameObject.GetComponent<PlayerDamageAnimation>();
         deathAnimation = gameObject.GetComponent<PlayerDeathAnimation>();
         UpdateGold(0);
     }
 
-    void UpdateGold(int amount) {
+    protected virtual void UpdateGold(int amount) {
         playerState.gold = Mathf.Min(maxGold, amount);
         transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
         for (int i = 0; i < playerState.hand.Count; i++) {
@@ -80,33 +93,31 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void UpdateHealth(int amount) {
+    protected void UpdateHealth(int amount) {
         playerState.health = Mathf.Min(maxHealth, amount);
         transform.Find("Health").GetComponent<TextMesh>().text = playerState.health.ToString();
     }
 
-    void AddCardToHand(CardController card) {
+    protected virtual void AddCardToHand(CardController card) {
         playerState.hand.Add(card);
         card.SetPlayerController(this);
-        if (card.cardState.cost > playerState.gold) card.HideOutline();
-        else card.ShowOutline();
         UpdateHandPosition();
     }
     
-    void UpdateHandPosition() {
+    protected void UpdateHandPosition() {
         // reposition all cards
         int numCards = playerState.hand.Count;
         float angle = spacing / 2 * (numCards - 1);
         if (angle > handAngle) angle = handAngle;
         float[] linspace = Util.Linspace(-angle, angle, numCards);
-        float y = 10;
+        float y = Util.CardSpawnHeight;
         for (int i = 0; i < numCards; i++) {
-            Quaternion rotation = Quaternion.Euler(270, 180 + linspace[i], 0);
+            Quaternion rotation = Quaternion.Euler(xRotation, 180 + linspace[i], 0);
             Vector3 position = (Quaternion.Euler(0, linspace[i], 0) * new Vector3(0, 0, length)) + pivot;
             position.y = y + i;
             CardController card = playerState.hand[i];
-            if (!card.selected) card.MoveInHand(position, rotation);
-            else card.MoveInHandOnDrop(position, rotation);
+            if (!card.selected) card.Move(position, rotation);
+            else card.MoveOnDrop(position, rotation);
         }
     }
 }
