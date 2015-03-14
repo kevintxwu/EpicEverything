@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class AIController : PlayerController {
 
@@ -18,7 +19,7 @@ public class AIController : PlayerController {
     protected void Awake() {
         cardSpawnPosition = new Vector3(-200, 10, 200);
         handAngle = 15;
-        pivot = new Vector3(-40, 1, 510);
+        pivot = new Vector3(-60, 1, 510);
         length = -400;
         spacing = 6;
         xRotation = 90;
@@ -77,7 +78,7 @@ public class AIController : PlayerController {
 
     protected override void UpdateGold(int amount) {
         playerState.gold = Mathf.Min(maxGold, amount);
-        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
+        goldText.text = playerState.gold.ToString();
     }
 
     protected override void AddCardToHand(CardController card) {

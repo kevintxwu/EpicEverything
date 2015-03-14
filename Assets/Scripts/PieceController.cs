@@ -10,9 +10,9 @@ public class PieceController : MonoBehaviour {
     private ParticleSystem outlineParticle;
     private TextMeshPro attackText;
     private TextMeshPro healthText;
+
     // temp
     public PlayerController player;
-    // temp
     public Material defaultMaterial;
 
     public float lastAttackTime {get; private set;}

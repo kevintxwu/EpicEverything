@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 [System.Serializable]
 public class PlayerState {
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour {
     
     protected List<CardState>.Enumerator deckEnumerator;
     protected int turn;
+    protected TextMeshPro healthText;
+    protected TextMeshPro goldText;
+    protected TextMeshPro timerText;
 
     protected Vector3 cardSpawnPosition;
     protected float handAngle;
@@ -67,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     protected void Awake() {
         cardSpawnPosition = new Vector3(200, 10, -200);
         handAngle = 15;
-        pivot = new Vector3(40, 1, -490);
+        pivot = new Vector3(60, 1, -490);
         length = 400;
         spacing = 6;
         xRotation = 270;
@@ -78,6 +82,9 @@ public class PlayerController : MonoBehaviour {
     protected void Init() {
         Util.Shuffle(playerState.deck);
         deckEnumerator = playerState.deck.GetEnumerator();
+        healthText = transform.Find("Health").GetComponent<TextMeshPro>();
+        goldText = transform.Find("Gold").GetComponent<TextMeshPro>();
+        timerText = transform.Find("Timer").GetComponent<TextMeshPro>();
         damageAnimation = gameObject.GetComponent<PlayerDamageAnimation>();
         deathAnimation = gameObject.GetComponent<PlayerDeathAnimation>();
         UpdateGold(0);
@@ -85,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 
     protected virtual void UpdateGold(int amount) {
         playerState.gold = Mathf.Min(maxGold, amount);
-        transform.Find("Gold").GetComponent<TextMesh>().text = playerState.gold.ToString();
+        goldText.text = playerState.gold.ToString();
         for (int i = 0; i < playerState.hand.Count; i++) {
             CardController card = playerState.hand[i];
             if (card.cardState.cost > playerState.gold) card.HideOutline();
@@ -95,7 +102,7 @@ public class PlayerController : MonoBehaviour {
 
     protected void UpdateHealth(int amount) {
         playerState.health = Mathf.Min(maxHealth, amount);
-        transform.Find("Health").GetComponent<TextMesh>().text = playerState.health.ToString();
+        healthText.text = playerState.health.ToString();
     }
 
     protected virtual void AddCardToHand(CardController card) {

@@ -29,11 +29,11 @@ public class PieceDamageAnimation : MonoBehaviour {
         dustParticle.Emit((int) Mathf.Pow(damage, 2) * 20);
 
         positionDiff.Normalize();
-        Vector3 force = (150 * damage + 1500) * Vector3.up;
-        Vector3 position = new Vector3 (transform.position.x + 6.9f * positionDiff.x + Random.Range(-5f, 5f), 
-                                        0, 
-                                        transform.position.z + 6.9f * positionDiff.z + Random.Range(-5f, 5f));
-        rigidbody.AddForceAtPosition(force, position);
+        // Vector3 force = (150 * damage + 1500) * Vector3.up;
+        // Vector3 position = new Vector3 (transform.position.x + 6.9f * positionDiff.x + Random.Range(-5f, 5f), 
+        //                                 0, 
+        //                                 transform.position.z + 6.9f * positionDiff.z + Random.Range(-5f, 5f));
+        // rigidbody.AddForceAtPosition(force, position);
         endAnimationTime = Time.time + 3;
     }
 
