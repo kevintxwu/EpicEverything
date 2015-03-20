@@ -9,12 +9,14 @@ public class PlayerState {
     public List<CardState> deck;
     public int health;
     public int gold;
+	public int timer;
 }
 
 public class PlayerController : MonoBehaviour {
 
     public const int maxGold = 10;
-    public const int maxHealth = 10;
+    public const int maxHealth = 20;
+	public const int baseTime = 10;
 
     public PlayerState playerState;
     public GameObject cardModel;
@@ -66,12 +68,13 @@ public class PlayerController : MonoBehaviour {
         turn += 1;
         DrawCard();
         UpdateGold(turn);
+		UpdateTimer();
     }
 
     protected void Awake() {
         cardSpawnPosition = new Vector3(200, 10, -200);
         handAngle = 15;
-        pivot = new Vector3(60, 1, -490);
+        pivot = new Vector3(60, 1, -505);
         length = 400;
         spacing = 6;
         xRotation = 270;
@@ -88,6 +91,9 @@ public class PlayerController : MonoBehaviour {
         damageAnimation = gameObject.GetComponent<PlayerDamageAnimation>();
         deathAnimation = gameObject.GetComponent<PlayerDeathAnimation>();
         UpdateGold(0);
+		UpdateHealth(20);
+		UpdateTimer();
+		StartCoroutine(Timer());
     }
 
     protected virtual void UpdateGold(int amount) {
@@ -104,6 +110,19 @@ public class PlayerController : MonoBehaviour {
         playerState.health = Mathf.Min(maxHealth, amount);
         healthText.text = playerState.health.ToString();
     }
+
+	protected void UpdateTimer() {
+		playerState.timer = baseTime;
+		timerText.text = playerState.timer.ToString();
+	}
+
+	IEnumerator Timer() {
+		while (true) {
+			timerText.text = playerState.timer.ToString();
+			playerState.timer--;
+			yield return new WaitForSeconds(1);
+		}
+	}
 
     protected virtual void AddCardToHand(CardController card) {
         playerState.hand.Add(card);

@@ -8,7 +8,7 @@ public class AIController : PlayerController {
     public List<PieceController> pieces;
     public List<PieceController> opponentPieces;
 
-    private float actionWait = 1;
+    private float actionWait = 5;
 
     public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
@@ -19,7 +19,7 @@ public class AIController : PlayerController {
     protected void Awake() {
         cardSpawnPosition = new Vector3(-200, 10, 200);
         handAngle = 15;
-        pivot = new Vector3(-60, 1, 510);
+        pivot = new Vector3(-60, 1, 525);
         length = -400;
         spacing = 6;
         xRotation = 90;
@@ -28,13 +28,17 @@ public class AIController : PlayerController {
         StartCoroutine(AIAction());
     }
 
+	private bool Randomize() {
+		return Random.value < 0.69;
+	}
+
     IEnumerator AIAction() {
         while (true) {
             List<PieceController> emptyPieces = new List<PieceController>();
             foreach (PieceController piece in pieces) {
-                if (piece.CanAttack()) {
+                if (piece.CanAttack() && Randomize()) {
                     PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
-                    Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 7);
+                    Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
                     ArrowController arrow = ArrowController.Create(piece.transform.position);
                     for (int i = 1; i < intervals.Length; i++) {
                         arrow.UpdateTransform(intervals[i]);
@@ -43,6 +47,7 @@ public class AIController : PlayerController {
                     arrow.Snap(other.cardState == null);
                     yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
                     piece.Attack(other);
+					yield return new WaitForSeconds(1);
                 }
             }
             PieceController playablePiece = null;
@@ -62,7 +67,7 @@ public class AIController : PlayerController {
                     playablePiece.transform.position.z - 17);
                 playableCard.PickupCard();
                 playableCard.Move(position, playableCard.transform.rotation);
-                yield return new WaitForSeconds(3*playableCard.repositionTime);
+                yield return new WaitForSeconds(3 * playableCard.repositionTime);
                 playableCard.PlayCard(playablePiece);
             }
             yield return new WaitForSeconds(actionWait);

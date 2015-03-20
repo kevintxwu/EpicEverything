@@ -9,8 +9,12 @@ public class CardState {
     public int time;
     public int cost;
     public bool ranged;
-    public bool speed;
     public bool block;
+	public bool speed;
+	public bool hidden;
+	public string name;
+	public string effect;
+	public string type;
 
     // temporary
     public Material cardMaterial;
