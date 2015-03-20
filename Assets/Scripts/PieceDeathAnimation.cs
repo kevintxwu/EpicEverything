@@ -28,7 +28,7 @@ public class PieceDeathAnimation : MonoBehaviour {
 
     void FixedUpdate() {
         if (opacity < 0.01) {
-            renderer.material = piece.defaultMaterial;
+            piece.DisableRenderer();
             opacity = 1;
             fading = false;
         }

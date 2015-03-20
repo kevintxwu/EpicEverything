@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PiecePlayAnimation : MonoBehaviour {
 
+    private PieceController piece;
     private ParticleSystem dustParticle;
     private ParticleSystem smokeParticle;
     private ParticleSystem crackParticle;
@@ -14,11 +15,12 @@ public class PiecePlayAnimation : MonoBehaviour {
         smokeParticle.Emit(cost * 10);
         crackParticle.startSize = cost * 10 + 50;
         crackParticle.Emit(1);
-        print(cardState.pieceMaterial);
         renderer.material = cardState.pieceMaterial;
+        piece.EnableRenderer();
     }
 
     void Start() {
+        piece = gameObject.GetComponent<PieceController>();
         dustParticle = transform.Find("DustParticle").particleSystem;
         smokeParticle = transform.Find("SmokeParticle").particleSystem;
         crackParticle = transform.Find("CrackParticle").particleSystem;

@@ -15,6 +15,7 @@ public class CardState {
     // temporary
     public Material cardMaterial;
     public Material pieceMaterial;
+    public string color;
 }
 
 public class CardController : MonoBehaviour {
