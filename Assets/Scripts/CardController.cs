@@ -10,11 +10,12 @@ public class CardState {
     public int cost;
     public bool ranged;
     public bool block;
-	public bool speed;
-	public bool hidden;
-	public string name;
-	public string effect;
-	public string type;
+    public bool speed;
+    public bool hidden;
+    public string name;
+    public string description;
+    public string effect;
+    public string type;
 
     // temporary
     public Material cardMaterial;
@@ -91,13 +92,13 @@ public class CardController : MonoBehaviour {
         transform.Find("OutlineParticle").gameObject.active = false;
     }
 
-	public void ShowSelect() {
-		transform.Find("SelectParticle").gameObject.active = true;
-	}
-	
-	public void HideSelect() {
-		transform.Find("SelectParticle").gameObject.active = false;
-	}
+    public void ShowSelect() {
+        transform.Find("SelectParticle").gameObject.active = true;
+    }
+    
+    public void HideSelect() {
+        transform.Find("SelectParticle").gameObject.active = false;
+    }
 
     void Awake() {
         renderer.material = cardState.cardMaterial;
@@ -106,6 +107,9 @@ public class CardController : MonoBehaviour {
         transform.Find("Health").GetComponent<TextMeshPro>().text = cardState.health.ToString();
         transform.Find("Cost").GetComponent<TextMeshPro>().text = cardState.cost.ToString();
         transform.Find("Time").GetComponent<TextMeshPro>().text = cardState.time.ToString();
+        transform.Find("Name").GetComponent<TextMeshPro>().text = cardState.name.ToString();
+        transform.Find("Effect").GetComponent<TextMeshPro>().text = cardState.effect.ToString();
+        transform.Find("Type").GetComponent<TextMeshPro>().text = cardState.type.ToString();
     }
 
     void MoveToTransform(Vector3 position, Quaternion rotation, float time) {

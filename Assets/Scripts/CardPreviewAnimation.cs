@@ -46,7 +46,7 @@ public class CardPreviewAnimation : MonoBehaviour {
         Vector3 position = new Vector3(transform.position.x, Util.CardHeight, cardSpawnPosition);
         GameObject cardObject = Instantiate(gameObject, position, Util.CardRotation) as GameObject;
         Destroy(cardObject.collider);
-        cardObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        cardObject.transform.localScale = 1.5f * (new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z));
         return cardObject;
     }
 }

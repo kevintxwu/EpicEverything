@@ -1,3 +1,71 @@
 Base path: /Applications/Unity/Unity.app/Contents
-Pipe name: \\.\pipe\UnityShaderCompiler-1--1604513368
+Pipe name: \\.\pipe\UnityShaderCompiler-1--1595026988
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=3530 outsize=2845 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=10031 outsize=2587 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=10031 outsize=1262 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=972 outsize=622 kw=SHADOWS_DEPTH ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=972 outsize=198 kw=SHADOWS_DEPTH ok=1
+Cmd: preprocess
+  insize=4126 outsize=3674 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=10731 outsize=2656 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=10731 outsize=3811 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5968 outsize=2517 kw=POINT GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5968 outsize=3718 kw=POINT GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=962 outsize=622 kw=SHADOWS_DEPTH ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=962 outsize=198 kw=SHADOWS_DEPTH ok=1
+Cmd: preprocess
+  insize=6478 outsize=2310 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=4472 outsize=2306 kw=UNDERLAY_OFF MASK_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=4472 outsize=410 kw=UNDERLAY_OFF MASK_OFF ok=1
+Cmd: preprocess
+  insize=1726 outsize=884 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1144 outsize=767 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1144 outsize=228 kw= ok=1
+Cmd: preprocess
+  insize=9097 outsize=3426 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5975 outsize=2298 kw=GLOW_OFF UNDERLAY_OFF MASK_OFF BEVEL_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5975 outsize=1035 kw=GLOW_OFF UNDERLAY_OFF MASK_OFF BEVEL_OFF ok=1
+Cmd: preprocess
+  insize=2108 outsize=988 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1422 outsize=733 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1422 outsize=279 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5975 outsize=2909 kw=GLOW_OFF MASK_OFF UNDERLAY_ON BEVEL_ON ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5975 outsize=3668 kw=GLOW_OFF MASK_OFF UNDERLAY_ON BEVEL_ON ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5968 outsize=2291 kw=DIRECTIONAL GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5968 outsize=3564 kw=DIRECTIONAL GLOW_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5975 outsize=3047 kw=GLOW_ON MASK_OFF UNDERLAY_ON BEVEL_ON ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5975 outsize=4309 kw=GLOW_ON MASK_OFF UNDERLAY_ON BEVEL_ON ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=4472 outsize=2891 kw=MASK_OFF UNDERLAY_ON ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=4472 outsize=662 kw=MASK_OFF UNDERLAY_ON ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5975 outsize=2298 kw=GLOW_OFF UNDERLAY_OFF MASK_OFF BEVEL_ON ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5975 outsize=3548 kw=GLOW_OFF UNDERLAY_OFF MASK_OFF BEVEL_ON ok=1
