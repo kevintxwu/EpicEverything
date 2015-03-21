@@ -21,17 +21,19 @@ public class CardPreviewAnimation : MonoBehaviour {
 
     void OnMouseExit() {
         ShowNormalCard();
+		card.HideSelect();
     }
 
     void OnMouseDown() {
         ShowNormalCard();
+		if (card.CanPlay()) card.ShowSelect();
     }
 
     private void ShowExpandedCard() {
         expandedCardObject = GenerateExpandedCard();
         renderer.enabled = false;
         foreach (Renderer r in GetComponentsInChildren(typeof(Renderer))) r.enabled = false;
-        transform.Find("OutlineParticle").particleSystem.renderer.enabled = false;;
+        transform.Find("OutlineParticle").particleSystem.renderer.enabled = false;
     }
 
     private void ShowNormalCard() {

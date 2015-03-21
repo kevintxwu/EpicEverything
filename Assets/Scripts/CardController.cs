@@ -52,6 +52,10 @@ public class CardController : MonoBehaviour {
         gameObject.GetComponent<CardPlayAnimation>().Animate(piece, cardState.cost);
     }
 
+	public bool CanPlay() {
+		return player.playerState.gold >= cardState.cost;
+	}
+
     public bool IsPlayable(PieceController piece) {
         if (piece.cardState != null ||
             piece.player != player ||

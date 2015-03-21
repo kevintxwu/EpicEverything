@@ -26,7 +26,7 @@ public class PieceController : MonoBehaviour {
     public void PlayCard(CardState cardState) {
         this.cardState = cardState;
         lastAttackTime = Time.time;
-        if (cardState.speed) lastAttackTime = Time.time - cardState.time;
+        // if (cardState.speed) lastAttackTime = Time.time - cardState.time;
         attackObj.renderer.material = (Material) Resources.Load("attack_" + cardState.color, typeof(Material));
         healthObj.renderer.material = (Material) Resources.Load("health_" + cardState.color, typeof(Material));
         UpdateCardHealth();
