@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour {
 
     protected void UpdateHealth(int amount) {
         playerState.health = Mathf.Min(maxHealth, amount);
+		playerState.health = Mathf.Max(0, playerState.health);
         healthText.text = playerState.health.ToString();
     }
 

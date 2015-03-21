@@ -26,6 +26,8 @@ public class PieceAttackAnimation : MonoBehaviour {
             DestroyArrow();
             return;
         }
+		piece.attacking = false;
+		piece.HideSelect();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         bool destroyArrow = true;
         RaycastHit hit = new RaycastHit();
@@ -40,7 +42,11 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        if (piece.cardState != null) CreateArrow();
+        if (piece.cardState != null && piece.CanAttack ()) {
+			CreateArrow();
+			piece.attacking = true;
+			piece.ShowSelect();
+		}
     }
 
     void CreateArrow() {

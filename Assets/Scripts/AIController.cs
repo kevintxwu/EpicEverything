@@ -8,7 +8,7 @@ public class AIController : PlayerController {
     public List<PieceController> pieces;
     public List<PieceController> opponentPieces;
 
-    private float actionWait = 5;
+    private float actionWait = 10;
 
     public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
@@ -34,25 +34,8 @@ public class AIController : PlayerController {
 
     IEnumerator AIAction() {
         while (true) {
-            List<PieceController> emptyPieces = new List<PieceController>();
-            foreach (PieceController piece in pieces) {
-                if (piece.CanAttack() && Randomize()) {
-                    PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
-                    Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
-                    ArrowController arrow = ArrowController.Create(piece.transform.position);
-                    for (int i = 1; i < intervals.Length; i++) {
-                        arrow.UpdateTransform(intervals[i]);
-                        yield return new WaitForSeconds(0.015f);
-                    }
-                    arrow.Snap(other.cardState == null);
-                    yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
-                    piece.Attack(other);
-					yield return new WaitForSeconds(1);
-                }
-            }
             PieceController playablePiece = null;
             CardController playableCard = null;
-            Util.Shuffle(pieces);
             foreach (CardController card in playerState.hand) {
                 playablePiece = FindPlayablePiece(card);
                 if (playablePiece != null) {
@@ -70,6 +53,22 @@ public class AIController : PlayerController {
                 yield return new WaitForSeconds(3 * playableCard.repositionTime);
                 playableCard.PlayCard(playablePiece);
             }
+			Util.Shuffle(pieces);
+			foreach (PieceController piece in pieces) {
+				if (piece.CanAttack() && Randomize()) {
+					PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
+					Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
+					ArrowController arrow = ArrowController.Create(piece.transform.position);
+					for (int i = 1; i < intervals.Length; i++) {
+						arrow.UpdateTransform(intervals[i]);
+						yield return new WaitForSeconds(0.015f);
+					}
+					arrow.Snap(other.cardState == null);
+					yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
+					piece.Attack(other);
+					yield return new WaitForSeconds(1);
+				}
+			}
             yield return new WaitForSeconds(actionWait);
         }
     }

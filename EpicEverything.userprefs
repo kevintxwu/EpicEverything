@@ -1,16 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayCardAnimation.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnTimerScript.cs">
     <Files>
-      <File FileName="Assets/PlayCard.cs" Line="22" Column="16" />
-      <File FileName="Assets/Scripts/PlayCardAnimation.cs" Line="13" Column="6" />
-      <File FileName="Assets/Scripts/PieceController.cs" Line="67" Column="1" />
-      <File FileName="Assets/Scripts/PieceDamageAnimation.cs" Line="64" Column="1" />
-      <File FileName="Assets/Scripts/PieceDeathAnimation.cs" Line="6" Column="15" />
-      <File FileName="Assets/Scripts/AttackPiece.cs" Line="26" Column="72" />
-      <File FileName="Assets/Scripts/HighlightTile.cs" Line="13" Column="2" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="48" Column="1" />
-      <File FileName="Assets/ElevatePiece.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scripts/AIController.cs" Line="32" Column="30" />
+      <File FileName="Assets/Scripts/TurnTimerScript.cs" Line="30" Column="10" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="64" Column="40" />
+      <File FileName="Assets/Scripts/CardController.cs" Line="17" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

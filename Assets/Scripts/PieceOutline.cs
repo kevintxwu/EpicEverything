@@ -18,11 +18,21 @@ public class PieceOutline : MonoBehaviour {
     //     }
     // }
 
-    void OnMouseEnter() {
-        if (piece.cardState != null) piece.ShowOutline(); 
+	void Update() {
+		if (piece.CanAttack()) {
+			piece.ShowOutline();
+		} else {
+			piece.HideOutline();
+		}
+	}
+
+    void OnMouseOver() {
+        if (piece.cardState != null && piece.CanAttack()) {
+			piece.ShowSelect();
+		}
     }
 
-    void OnMouseExit() {
-        piece.HideOutline();
-    }
+	void OnMouseExit() {
+		if (!piece.attacking) piece.HideSelect();
+	}
 }

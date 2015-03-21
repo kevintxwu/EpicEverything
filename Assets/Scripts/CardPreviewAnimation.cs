@@ -31,7 +31,7 @@ public class CardPreviewAnimation : MonoBehaviour {
         expandedCardObject = GenerateExpandedCard();
         renderer.enabled = false;
         foreach (Renderer r in GetComponentsInChildren(typeof(Renderer))) r.enabled = false;
-        transform.Find("OutlineParticle").particleSystem.renderer.enabled = false;
+        transform.Find("OutlineParticle").particleSystem.renderer.enabled = false;;
     }
 
     private void ShowNormalCard() {

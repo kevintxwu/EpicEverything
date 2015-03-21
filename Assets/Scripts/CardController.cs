@@ -91,6 +91,14 @@ public class CardController : MonoBehaviour {
         transform.Find("OutlineParticle").gameObject.active = false;
     }
 
+	public void ShowSelect() {
+		transform.Find("SelectParticle").gameObject.active = true;
+	}
+	
+	public void HideSelect() {
+		transform.Find("SelectParticle").gameObject.active = false;
+	}
+
     void Awake() {
         renderer.material = cardState.cardMaterial;
         mover = gameObject.GetComponent<MoveToTransform>();
