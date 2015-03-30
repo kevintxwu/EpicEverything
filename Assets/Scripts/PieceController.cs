@@ -22,6 +22,8 @@ public class PieceController : MonoBehaviour {
     public float lastAttackTime {get; private set;}
 
 	public bool attacking = false;
+	public string color;
+	public Vector3 position;
 
     public void PlayCard(CardState cardState) {
         this.cardState = cardState;
@@ -29,13 +31,14 @@ public class PieceController : MonoBehaviour {
         // if (cardState.speed) lastAttackTime = Time.time - cardState.time;
         attackObj.renderer.material = (Material) Resources.Load("attack_" + cardState.color, typeof(Material));
         healthObj.renderer.material = (Material) Resources.Load("health_" + cardState.color, typeof(Material));
+		color = cardState.color;
         UpdateCardHealth();
         UpdateCardAttack();
         gameObject.GetComponent<PiecePlayAnimation>().Animate(cardState);
     }
 
     public void ReceiveCreatureDamage(int damage, PieceController other) {
-        gameObject.GetComponent<PieceDamageAnimation>().Animate(damage, other);
+        gameObject.GetComponent<PieceDamageAnimation>().Animate(damage, this, other);
         if (cardState == null) player.ReceiveDamage(damage);
         else {
             cardState.health -= damage;
@@ -50,8 +53,14 @@ public class PieceController : MonoBehaviour {
 
     public bool CanAttack() {
         return (cardState != null &&
-                cardState.time + lastAttackTime <= Time.time);
+		        // Slow time by factor of 1.5
+                cardState.time * 1.5f + lastAttackTime <= Time.time);
     }
+
+	public bool InRange(PieceController other) {
+		print (Vector3.Distance (position, other.position));
+		return Vector3.Distance(position, other.position) < 65;
+	}
 
     public void Attack(PieceController other) {
         lastAttackTime = Time.time;
@@ -93,6 +102,7 @@ public class PieceController : MonoBehaviour {
     public void PieceDeath() {
         cardState = null;
         HideOutline();
+		HideSelect();
         gameObject.GetComponent<PieceDeathAnimation>().Animate();
         gameObject.GetComponent<PieceAttackAnimation>().DestroyArrow();
     }
@@ -107,6 +117,7 @@ public class PieceController : MonoBehaviour {
 		timerObj = transform.Find("Canvas").gameObject;
         attackText = attackObj.transform.Find("Text").GetComponent<TextMeshPro>();
         healthText = healthObj.transform.Find("Text").GetComponent<TextMeshPro>();
+		position = transform.position;
         DisableRenderer();
     }
 

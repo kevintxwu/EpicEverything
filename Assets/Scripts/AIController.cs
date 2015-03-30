@@ -8,7 +8,7 @@ public class AIController : PlayerController {
     public List<PieceController> pieces;
     public List<PieceController> opponentPieces;
 
-    private float actionWait = 10;
+    // private float actionWait = 1;
 
     public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
@@ -19,8 +19,8 @@ public class AIController : PlayerController {
     protected void Awake() {
         cardSpawnPosition = new Vector3(-200, 10, 200);
         handAngle = 15;
-        pivot = new Vector3(-60, 1, 525);
-        length = -400;
+        pivot = new Vector3(-60, 1, 471);
+        length = -350;
         spacing = 6;
         xRotation = 90;
 
@@ -57,19 +57,21 @@ public class AIController : PlayerController {
 			foreach (PieceController piece in pieces) {
 				if (piece.CanAttack() && Randomize()) {
 					PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
-					Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
-					ArrowController arrow = ArrowController.Create(piece.transform.position);
-					for (int i = 1; i < intervals.Length; i++) {
-						arrow.UpdateTransform(intervals[i]);
-						yield return new WaitForSeconds(0.015f);
+					if (other.InRange(piece)) {
+						Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
+						ArrowController arrow = ArrowController.Create(piece.transform.position);
+						for (int i = 1; i < intervals.Length; i++) {
+							arrow.UpdateTransform(intervals[i]);
+							yield return new WaitForSeconds(0.015f);
+						}
+						arrow.Snap(other.cardState == null);
+						yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
+						piece.Attack(other);
+						yield return new WaitForSeconds(1);
 					}
-					arrow.Snap(other.cardState == null);
-					yield return new WaitForSeconds(5 * Util.ArrowSnapWait);
-					piece.Attack(other);
-					yield return new WaitForSeconds(1);
 				}
 			}
-            yield return new WaitForSeconds(actionWait);
+            yield return new WaitForSeconds(1);
         }
     }
 

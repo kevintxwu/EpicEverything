@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour {
     protected void Awake() {
         cardSpawnPosition = new Vector3(200, 10, -200);
         handAngle = 15;
-        pivot = new Vector3(60, 1, -505);
-        length = 400;
+        pivot = new Vector3(60, 1, -460);
+        length = 350;
         spacing = 6;
         xRotation = 270;
 
@@ -121,7 +121,11 @@ public class PlayerController : MonoBehaviour {
 		while (true) {
 			timerText.text = playerState.timer.ToString();
 			playerState.timer--;
-			yield return new WaitForSeconds(1);
+
+			// Slow time by factor of 1.5
+			yield return new WaitForSeconds(1.5f);
+
+			// yield return new WaitForSeconds(1);
 		}
 	}
 

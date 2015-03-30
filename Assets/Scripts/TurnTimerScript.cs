@@ -12,6 +12,10 @@ public class TurnTimerScript : MonoBehaviour {
 
     void Start () {
         gameController = gameObject.GetComponent<GameController>();
+
+		// Slow time by factor of 1.5
+		turnWait *= 1.5f;
+
         StartCoroutine(DrawInitialCards());
         StartCoroutine(TurnTimer());
     }
