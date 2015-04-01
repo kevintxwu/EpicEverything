@@ -33,6 +33,8 @@ public class PieceAttackAnimation : MonoBehaviour {
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit, Util.RayDepth, Util.PieceLayer)) {
             PieceController other = hit.collider.gameObject.GetComponent<PieceController>();
+            print(other);
+            print(piece);
             if (other.player != piece.player && piece.InRange(other)) {
                 StartCoroutine(AttackAfterSnap(other));
                 destroyArrow = false;

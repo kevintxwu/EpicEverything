@@ -57,6 +57,7 @@ public class CardPlayAnimation : MonoBehaviour {
     IEnumerator DropPiece(PieceController piece) {
         Vector3 position = new Vector3(transform.position.x, Util.CardHeight, transform.position.z + 17);
         GameObject pieceObject = Instantiate(piecePrefab, position, Util.CardRotation) as GameObject;
+        pieceObject.layer = 0;
         pieceObject.renderer.material = card.cardState.pieceMaterial;
         yield return new WaitForSeconds(pieceInitWait);
         pieceObject.rigidbody.useGravity = true;
