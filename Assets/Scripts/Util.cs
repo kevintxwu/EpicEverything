@@ -45,4 +45,9 @@ public static class Util {
             list[n] = value;
         }
     }
+    
+    public static bool CheckPlayer(PlayerController player) {
+    	if (player.gameObject.name != "Player1") return false;
+    	return true;
+    }
 }

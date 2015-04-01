@@ -22,7 +22,8 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void OnMouseUp() {
-        if (!piece.CanAttack()) {
+		if (!piece.active) return;
+		if (!piece.CanAttack()) {
             DestroyArrow();
             return;
         }
@@ -44,7 +45,8 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        if (piece.cardState != null && piece.CanAttack()) {
+		if (!piece.active) return;
+		if (piece.cardState != null && piece.CanAttack()) {
 			CreateArrow();
 			piece.attacking = true;
 			piece.ShowSelect();

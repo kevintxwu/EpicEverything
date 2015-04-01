@@ -14,6 +14,7 @@ public class CardPreviewAnimation : MonoBehaviour {
 
 
     void OnMouseEnter() {
+		if (!card.active) return;
         if (!card.selected) {
             ShowExpandedCard();
         }
@@ -25,6 +26,7 @@ public class CardPreviewAnimation : MonoBehaviour {
     }
 
     void OnMouseDown() {
+    	if (!card.active) return;
         ShowNormalCard();
 		if (card.CanPlay()) card.ShowSelect();
     }

@@ -27,6 +27,7 @@ public class PieceOutline : MonoBehaviour {
 	}
 
     void OnMouseOver() {
+		if (!Util.CheckPlayer(piece.player)) return;
         if (piece.cardState != null && piece.CanAttack()) {
 			piece.ShowSelect();
 		}

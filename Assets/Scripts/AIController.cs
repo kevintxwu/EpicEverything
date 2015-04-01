@@ -87,12 +87,12 @@ public class AIController : PlayerController {
         goldText.text = playerState.gold.ToString();
     }
 
-    protected override void AddCardToHand(CardController card) {
-        playerState.hand.Add(card);
-        card.SetPlayerController(this);
-        Destroy(card.gameObject.GetComponent<CardPreviewAnimation>());
-        Destroy(card.gameObject.GetComponent<MoveCardWithMouse>());
-        UpdateHandPosition();
-    }
+//    protected override void AddCardToHand(CardController card) {
+//        playerState.hand.Add(card);
+//        card.SetPlayerController(this);
+//        Destroy(card.gameObject.GetComponent<CardPreviewAnimation>());
+//        Destroy(card.gameObject.GetComponent<MoveCardWithMouse>());
+//        UpdateHandPosition();
+//    }
 
 }

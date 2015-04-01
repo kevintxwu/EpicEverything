@@ -32,8 +32,9 @@ public class CardController : MonoBehaviour {
     public float returnTime;
 
     public bool selected {get; private set;}
-
-    private PlayerController player;
+    public bool active {get; private set;}
+	
+	private PlayerController player;
     private MoveToTransform mover;
     private Vector3 position;
     private Quaternion rotation;
@@ -80,6 +81,7 @@ public class CardController : MonoBehaviour {
 
     public void SetPlayerController(PlayerController player) {
         this.player = player;
+        active = Util.CheckPlayer(player);
 
         // // TODO: how can we do this better...
         // if (player.GetType() == typeof(AIController)) {

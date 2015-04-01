@@ -12,6 +12,7 @@ public class MoveCardWithMouse : MonoBehaviour {
     }
 
     void Update () {
+		if (!card.active) return;
         if (card.selected) {
             Vector3 cameraPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 oldPosition = position;
@@ -22,11 +23,13 @@ public class MoveCardWithMouse : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        card.PickupCard();
+		if (!card.active) return;
+		card.PickupCard();
     }
 
     void OnMouseUp () {
-        RaycastHit hit = new RaycastHit();
+		if (!card.active) return;
+		RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(
             transform.position, Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {
             PieceController piece = hit.collider.gameObject.GetComponent<PieceController>();

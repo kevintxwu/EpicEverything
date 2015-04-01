@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour {
         }
         cardModel.GetComponent<CardController>().cardState = deckEnumerator.Current;
         GameObject cardObject = Instantiate(cardModel, cardSpawnPosition, Util.CardRotation) as GameObject;
+		CardController card = cardObject.GetComponent<CardController>();
+		card.SetPlayerController(this);
         AddCardToHand(cardObject.GetComponent<CardController>());
     }
 
@@ -129,9 +131,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-    protected virtual void AddCardToHand(CardController card) {
+    protected void AddCardToHand(CardController card) {
         playerState.hand.Add(card);
-        card.SetPlayerController(this);
         UpdateHandPosition();
     }
     

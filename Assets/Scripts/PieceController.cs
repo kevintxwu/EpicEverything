@@ -5,6 +5,7 @@ using TMPro;
 public class PieceController : MonoBehaviour {
 
     public CardState cardState {get; private set;}
+    public bool active {get; private set;}
     
     private GameController game;
     private ParticleSystem outlineParticle;
@@ -109,6 +110,7 @@ public class PieceController : MonoBehaviour {
 
     void Awake() {
         cardState = null;
+        active = Util.CheckPlayer(player);
         game = Camera.main.GetComponent<GameController>();
         outlineParticle = transform.parent.transform.Find("OutlineParticle").gameObject.particleSystem;
 		selectParticle = transform.parent.transform.Find("SelectParticle").gameObject.particleSystem;
