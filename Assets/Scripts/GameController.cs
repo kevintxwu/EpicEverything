@@ -17,8 +17,9 @@ public class GameController : MonoBehaviour {
     public void Attack(PieceController attacker, PieceController defender) {
         CardState attackerCardState = attacker.cardState;
         CardState defenderCardState = defender.cardState;
+        bool retaliate = (defender.cardState != null && defender.InRange(attacker));
         defender.ReceiveCreatureDamage(attackerCardState.attack, attacker);
-        if (defenderCardState != null && (AdjacentPiece(attacker, defender) || defenderCardState.ranged)) {
+        if (defenderCardState != null && retaliate) {
             // deal retaliation damage
             attacker.ReceiveCreatureDamage(defenderCardState.attack, defender);
         }

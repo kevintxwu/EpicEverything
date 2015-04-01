@@ -12,6 +12,22 @@ public static class Util {
     public static float CardHeight = 20;
     public static float RayDepth = 100;
     public static int PieceLayer = 1 << 8;
+    public static float TimeScaleFactor = 0.5f;
+    
+    public static List<PieceController> p1Pieces = new List<PieceController> {
+    	GameObject.Find("Tile1a/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile1b/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile1c/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile1d/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile1e/Piece").GetComponent<PieceController>()
+	};
+	public static List<PieceController> p2Pieces = new List<PieceController> {
+		GameObject.Find("Tile2a/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile2b/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile2c/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile2d/Piece").GetComponent<PieceController>(),
+		GameObject.Find("Tile2e/Piece").GetComponent<PieceController>()
+	};
 
     public static float[] Linspace(float start, float end, int num) {
         float interval = (end - start) / (num - 1);
@@ -50,4 +66,10 @@ public static class Util {
     	if (player.gameObject.name != "Player1") return false;
     	return true;
     }
+    
+	public static List<PieceController> GetOpponentPieces(PlayerController player) {
+		if (player.gameObject.name == "Player1") return p2Pieces;
+		if (player.gameObject.name == "Player2") return p1Pieces;
+		return null;
+	}
 }

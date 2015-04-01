@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerDeathAnimation : MonoBehaviour {
 
 	public void Animate() {
-		print("PlayerDeathAnimation: " + gameObject.name);
+//		print("PlayerDeathAnimation: " + gameObject.name);
 	}
 
 }

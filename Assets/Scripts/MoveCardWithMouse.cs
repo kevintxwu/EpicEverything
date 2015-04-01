@@ -12,23 +12,23 @@ public class MoveCardWithMouse : MonoBehaviour {
     }
 
     void Update () {
-		if (!card.active) return;
+		if (!card.usable) return;
         if (card.selected) {
             Vector3 cameraPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 oldPosition = position;
+//            Vector3 oldPosition = position;
             position = new Vector3 (cameraPoint.x, Util.CardHeight, cameraPoint.z);
-            Vector3 velocity = position - oldPosition;
+//            Vector3 velocity = position - oldPosition;
             transform.position = position;
         }
     }
 
     void OnMouseDown() {
-		if (!card.active) return;
+		if (!card.usable) return;
 		card.PickupCard();
     }
 
     void OnMouseUp () {
-		if (!card.active) return;
+		if (!card.usable) return;
 		RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(
             transform.position, Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {

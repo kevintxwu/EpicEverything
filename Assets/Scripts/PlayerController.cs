@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour {
 
     public void PlayCard(CardController card) {
         playerState.hand.Remove(card);
-        print(playerState.hand.Count);
         UpdateGold(playerState.gold - card.cardState.cost);
         UpdateHandPosition();
     }
@@ -123,11 +122,7 @@ public class PlayerController : MonoBehaviour {
 		while (true) {
 			timerText.text = playerState.timer.ToString();
 			playerState.timer--;
-
-			// Slow time by factor of 1.5
-			yield return new WaitForSeconds(1.5f);
-
-			// yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(Util.TimeScaleFactor);
 		}
 	}
 

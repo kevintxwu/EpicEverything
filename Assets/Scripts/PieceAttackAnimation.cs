@@ -22,8 +22,8 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void OnMouseUp() {
-		if (!piece.active) return;
-		if (!piece.CanAttack()) {
+		if (!piece.usable) return;
+		if (!piece.Ready()) {
             DestroyArrow();
             return;
         }
@@ -34,9 +34,7 @@ public class PieceAttackAnimation : MonoBehaviour {
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit, Util.RayDepth, Util.PieceLayer)) {
             PieceController other = hit.collider.gameObject.GetComponent<PieceController>();
-            print(other);
-            print(piece);
-            if (other.player != piece.player && piece.InRange(other)) {
+            if (other.player != piece.player && piece.CanAttack(other)) {
                 StartCoroutine(AttackAfterSnap(other));
                 destroyArrow = false;
             }
@@ -45,8 +43,8 @@ public class PieceAttackAnimation : MonoBehaviour {
     }
 
     void OnMouseDown() {
-		if (!piece.active) return;
-		if (piece.cardState != null && piece.CanAttack()) {
+		if (!piece.usable) return;
+		if (piece.cardState != null && piece.Ready()) {
 			CreateArrow();
 			piece.attacking = true;
 			piece.ShowSelect();

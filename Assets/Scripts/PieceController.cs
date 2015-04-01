@@ -5,7 +5,7 @@ using TMPro;
 public class PieceController : MonoBehaviour {
 
     public CardState cardState {get; private set;}
-    public bool active {get; private set;}
+    public bool usable {get; private set;}
     
     private GameController game;
     private ParticleSystem outlineParticle;
@@ -29,7 +29,7 @@ public class PieceController : MonoBehaviour {
     public void PlayCard(CardState cardState) {
         this.cardState = cardState;
         lastAttackTime = Time.time;
-        // if (cardState.speed) lastAttackTime = Time.time - cardState.time;
+        if (cardState.speed) lastAttackTime = Time.time - (cardState.time * Util.TimeScaleFactor);
         attackObj.renderer.material = (Material) Resources.Load("attack_" + cardState.color, typeof(Material));
         healthObj.renderer.material = (Material) Resources.Load("health_" + cardState.color, typeof(Material));
 		color = cardState.color;
@@ -52,15 +52,23 @@ public class PieceController : MonoBehaviour {
         //TODO
     }
 
-    public bool CanAttack() {
+    public bool Ready() {
         return (cardState != null &&
-		        // Slow time by factor of 1.5
-                cardState.time * 1.5f + lastAttackTime <= Time.time);
+                (cardState.time * Util.TimeScaleFactor) + lastAttackTime <= Time.time);
     }
 
 	public bool InRange(PieceController other) {
-		print (Vector3.Distance (position, other.position));
-		return Vector3.Distance(position, other.position) < 65;
+		return (Vector3.Distance(position, other.position) < 65 || cardState.ranged);
+	}
+	
+	public bool CanAttack(PieceController other) {
+		if (InRange(other) && other.cardState != null && other.cardState.block) return true;
+		foreach (PieceController piece in Util.GetOpponentPieces(player)) {
+			if (InRange(piece) && piece.cardState != null && piece.cardState.block && piece != other) {
+				return false;
+			}
+		}
+		return InRange(other);
 	}
 
     public void Attack(PieceController other) {
@@ -69,19 +77,19 @@ public class PieceController : MonoBehaviour {
     }
     
     public void ShowOutline() {
-        outlineParticle.gameObject.active = true;
+        outlineParticle.gameObject.SetActive(true);
     }
 
     public void HideOutline() {
-        outlineParticle.gameObject.active = false;
-    }
+		outlineParticle.gameObject.SetActive(false);
+	}
 
 	public void ShowSelect() {
-		selectParticle.gameObject.active = true;
+		selectParticle.gameObject.SetActive(true);
 	}
 	
 	public void HideSelect() {
-		selectParticle.gameObject.active = false;
+		selectParticle.gameObject.SetActive(false);
 	}
 
     public void EnableRenderer() {
@@ -110,7 +118,7 @@ public class PieceController : MonoBehaviour {
 
     void Awake() {
         cardState = null;
-        active = Util.CheckPlayer(player);
+        usable = Util.CheckPlayer(player);
         game = Camera.main.GetComponent<GameController>();
         outlineParticle = transform.parent.transform.Find("OutlineParticle").gameObject.particleSystem;
 		selectParticle = transform.parent.transform.Find("SelectParticle").gameObject.particleSystem;

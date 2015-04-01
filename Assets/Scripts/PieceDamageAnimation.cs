@@ -43,7 +43,7 @@ public class PieceDamageAnimation : MonoBehaviour {
 
     void Update() {
         // if (transform.position.y > 100) transform.position = new Vector3(transform.position.x, 20, transform.position.z);
-        Vector3 angles = transform.rotation.eulerAngles;
+		// Vector3 angles = transform.rotation.eulerAngles;
         // if (angles.x > 300 || angles.x < 240)
         //     transform.rotation = Quaternion.Euler(Mathf.Clamp(angles.x, 240, 300), angles.y, angles.z);
         if (Time.time > endAnimationTime) ResetTransform();

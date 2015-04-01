@@ -16,15 +16,9 @@ public class PieceTimerAnimation : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (piece.cardState != null) {
-
-			// Slow time by factor of 1.5
-			float remainingWaitTime = piece.lastAttackTime + piece.cardState.time * 1.5f - Time.time;
-
+			float remainingWaitTime = piece.lastAttackTime + (piece.cardState.time * Util.TimeScaleFactor) - Time.time;
             if (remainingWaitTime > 0) {
-
-				// Slow time by factor of 1.5
-				timerImage.fillAmount = remainingWaitTime / (piece.cardState.time * 1.5f);
-
+				timerImage.fillAmount = remainingWaitTime / (piece.cardState.time * Util.TimeScaleFactor);
             } else timerImage.fillAmount = 0;
         }
     }

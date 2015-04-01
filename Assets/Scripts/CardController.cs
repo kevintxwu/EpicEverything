@@ -32,7 +32,7 @@ public class CardController : MonoBehaviour {
     public float returnTime;
 
     public bool selected {get; private set;}
-    public bool active {get; private set;}
+    public bool usable {get; private set;}
 	
 	private PlayerController player;
     private MoveToTransform mover;
@@ -81,7 +81,7 @@ public class CardController : MonoBehaviour {
 
     public void SetPlayerController(PlayerController player) {
         this.player = player;
-        active = Util.CheckPlayer(player);
+        usable = Util.CheckPlayer(player);
 
         // // TODO: how can we do this better...
         // if (player.GetType() == typeof(AIController)) {
@@ -91,19 +91,19 @@ public class CardController : MonoBehaviour {
     }
 
     public void ShowOutline() {
-        transform.Find("OutlineParticle").gameObject.active = true;
+        transform.Find("OutlineParticle").gameObject.SetActive(true);
     }
 
     public void HideOutline() {
-        transform.Find("OutlineParticle").gameObject.active = false;
+        transform.Find("OutlineParticle").gameObject.SetActive(false);
     }
 
     public void ShowSelect() {
-        transform.Find("SelectParticle").gameObject.active = true;
+        transform.Find("SelectParticle").gameObject.SetActive(true);
     }
     
     public void HideSelect() {
-        transform.Find("SelectParticle").gameObject.active = false;
+        transform.Find("SelectParticle").gameObject.SetActive(false);
     }
 
     void Awake() {

@@ -9,17 +9,8 @@ public class PieceOutline : MonoBehaviour {
         piece = gameObject.GetComponent<PieceController>();
     }
 
-    // void Update() {
-    //     RaycastHit hit = new RaycastHit();
-    //     if (Physics.Raycast(card.gameObject.transform.position,
-    //         Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {
-    //         PieceController piece = hit.collider.gameObject.GetComponent<PieceController>();
-    //         player.HighlightPiece(piece);
-    //     }
-    // }
-
 	void Update() {
-		if (piece.CanAttack()) {
+		if (piece.Ready()) {
 			piece.ShowOutline();
 		} else {
 			piece.HideOutline();
@@ -28,7 +19,7 @@ public class PieceOutline : MonoBehaviour {
 
     void OnMouseOver() {
 		if (!Util.CheckPlayer(piece.player)) return;
-        if (piece.cardState != null && piece.CanAttack()) {
+        if (piece.cardState != null && piece.Ready()) {
 			piece.ShowSelect();
 		}
     }

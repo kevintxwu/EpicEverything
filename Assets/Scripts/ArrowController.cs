@@ -51,7 +51,6 @@ public class ArrowController : MonoBehaviour {
     }
 
     void Awake() {
-        print("start");
         head = transform.Find("Head").gameObject;
         head.transform.position = origin;
         body = transform.Find("Body").gameObject;

@@ -5,24 +5,27 @@ using TMPro;
 
 public class AIController : PlayerController {
 
-    public List<PieceController> pieces;
-    public List<PieceController> opponentPieces;
+    private List<PieceController> pieces;
+    private List<PieceController> opponentPieces;
 
     // private float actionWait = 1;
 
-    public void PlayCard(CardController card) {
+    public new void PlayCard(CardController card) {
         playerState.hand.Remove(card);
         UpdateGold(playerState.gold - card.cardState.cost);
         UpdateHandPosition();
     }
 
-    protected void Awake() {
+    protected new void Awake() {
         cardSpawnPosition = new Vector3(-200, 10, 200);
         handAngle = 15;
         pivot = new Vector3(-60, 1, 471);
         length = -350;
         spacing = 6;
         xRotation = 90;
+        
+        pieces = Util.p2Pieces;
+        opponentPieces = Util.p1Pieces;
 
         Init();
         StartCoroutine(AIAction());
@@ -55,9 +58,9 @@ public class AIController : PlayerController {
             }
 			Util.Shuffle(pieces);
 			foreach (PieceController piece in pieces) {
-				if (piece.CanAttack() && Randomize()) {
+				if (piece.Ready() && Randomize()) {
 					PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
-					if (other.InRange(piece)) {
+					if (piece.CanAttack(other)) {
 						Vector3[] intervals = Util.Linspace(piece.transform.position, other.transform.position, 10);
 						ArrowController arrow = ArrowController.Create(piece.transform.position);
 						for (int i = 1; i < intervals.Length; i++) {
