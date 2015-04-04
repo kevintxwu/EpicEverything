@@ -4,7 +4,7 @@ using TMPro;
 
 public class CardPlayAnimation : MonoBehaviour {
 
-    const float fadeWait = 0.02f;
+    const float fadeWait = 0.01f;
     const float fadeRate = 0.04f;
     const float pieceInitWait = 0.25f;
     const float pieceDropWait = 0.69f;
@@ -15,13 +15,6 @@ public class CardPlayAnimation : MonoBehaviour {
     private CardController card;
 
     public void Animate(PieceController piece, int cost) {
-        transform.Find("Attack").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Health").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Cost").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Time").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Name").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Effect").GetComponent<TextMeshPro>().text = "";
-        transform.Find("Type").GetComponent<TextMeshPro>().text = "";
         transform.position = new Vector3(
             piece.transform.position.x,
             Util.CardHeight,
@@ -43,13 +36,32 @@ public class CardPlayAnimation : MonoBehaviour {
     }
 
     IEnumerator FadeCard() {
+		TextMeshPro attack = transform.Find("Attack").GetComponent<TextMeshPro>();
+		TextMeshPro health = transform.Find("Health").GetComponent<TextMeshPro>();
+		TextMeshPro cost = transform.Find("Cost").GetComponent<TextMeshPro>();
+		TextMeshPro time = transform.Find("Time").GetComponent<TextMeshPro>();
+		TextMeshPro name = transform.Find("Name").GetComponent<TextMeshPro>();
+		TextMeshPro effect = transform.Find("Effect").GetComponent<TextMeshPro>();
+		TextMeshPro type = transform.Find("Type").GetComponent<TextMeshPro>();
         renderer.material.shader = Shader.Find("Transparent/Diffuse");
         renderer.castShadows = false;
         float opacity = 1;
         while (opacity > 0.01) {
             opacity -= fadeRate;
+            byte byteOpacity = (byte) ((int) 255 * opacity);
             renderer.material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, opacity));
-            yield return new WaitForSeconds(fadeWait);
+			attack.faceColor = new Color32(0, 0, 0, byteOpacity);
+			attack.outlineColor = new Color32(255, 255, 255, byteOpacity);
+			health.faceColor = new Color32(0, 0, 0, byteOpacity);
+			health.outlineColor = new Color32(255, 255, 255, byteOpacity);
+			cost.faceColor = new Color32(0, 0, 0, byteOpacity);
+			cost.outlineColor = new Color32(255, 255, 255, byteOpacity);
+			time.faceColor = new Color32(0, 0, 0, byteOpacity);
+			time.outlineColor = new Color32(255, 255, 255, byteOpacity);
+			name.faceColor = new Color32(255, 255, 255, byteOpacity);
+			effect.faceColor = new Color32(255, 255, 255, byteOpacity);
+			type.faceColor = new Color32(255, 255, 255, byteOpacity);
+			yield return new WaitForSeconds(fadeWait);
         }
         Destroy(gameObject, 1.8f);
     }

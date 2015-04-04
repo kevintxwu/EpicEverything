@@ -22,9 +22,14 @@ public class TurnTimerScript : MonoBehaviour {
 	IEnumerator StartGameCountdown() {
 		GameObject startCountdownObject = GameObject.Find("StartCountdown");
 		TextMeshPro startCountdownText = startCountdownObject.GetComponent<TextMeshPro>();
+		float size = startCountdownText.fontSize;
 		for (int i = 3; i > 0; --i) {
 			startCountdownText.text = i.ToString();
-			yield return new WaitForSeconds(Util.TimeScaleFactor);
+			for (int j = 0; j < 10; j++) {
+				startCountdownText.fontSize = size * j / 10;
+				yield return new WaitForSeconds(0.03f);
+			}
+			yield return new WaitForSeconds(Util.TimeScaleFactor - 0.3f);
 		}
 		Destroy(startCountdownObject);
 		StartCoroutine(DrawInitialCards());
