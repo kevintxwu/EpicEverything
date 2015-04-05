@@ -29,6 +29,11 @@ public class MoveCardWithMouse : MonoBehaviour {
 
     void OnMouseUp () {
 		if (!card.usable) return;
+		if (card.cardState.spell) {
+			card.PlaySpell();
+			Destroy(this.gameObject);
+			return;
+		}
 		RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(
             transform.position, Vector3.down, out hit, Util.RayDepth, Util.PieceLayer)) {
