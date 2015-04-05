@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
         UpdateGold(0);
 		UpdateHealth(20);
 		UpdateTimer();
-		StartCoroutine(Timer());
+		StartCoroutine(Counter());
     }
 
     protected virtual void UpdateGold(int amount) {
@@ -116,6 +116,11 @@ public class PlayerController : MonoBehaviour {
 	protected void UpdateTimer() {
 		playerState.timer = baseTime;
 		timerText.text = playerState.timer.ToString();
+	}
+
+	IEnumerator Counter() {
+		yield return new WaitForSeconds(3 * Util.TimeScaleFactor);
+		StartCoroutine(Timer());
 	}
 
 	IEnumerator Timer() {
