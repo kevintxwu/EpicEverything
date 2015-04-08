@@ -1,16 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PiecePlayAnimation.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
     <Files>
-      <File FileName="Assets/Scripts/PieceDamageAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/AIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CardController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MoveCardWithMouse.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CardPlayAnimation.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Cards.cs" Line="45" Column="17" />
-      <File FileName="Assets/Scripts/PieceDeathAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PiecePlayAnimation.cs" Line="38" Column="24" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="4" Column="10" />
+      <File FileName="Assets/Scripts/PieceController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="36" Column="28" />
+      <File FileName="Assets/Scripts/PiecePlayAnimation.cs" Line="17" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

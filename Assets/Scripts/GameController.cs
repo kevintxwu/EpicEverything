@@ -10,6 +10,8 @@ public class GameState {
 public class GameController : MonoBehaviour {
 
     public GameState gameState;
+    public List<CardState> p1Pieces;
+    public List<CardState> p2Pieces;
 
     private PlayerController p1Controller;
     private PlayerController p2Controller;
@@ -40,9 +42,19 @@ public class GameController : MonoBehaviour {
     void Start() {
         p1Controller = GameObject.Find("Player1").GetComponent<PlayerController>();
         p2Controller = GameObject.Find("Player2").GetComponent<PlayerController>();
+		Invoke("PopulateTiles", 1);
     }
-
-    private bool AdjacentPiece(PieceController a, PieceController b) {
-        return true;
+    
+    void PopulateTiles() {
+    	for (int i = 0; i < 5; i++) {
+    		CardState card = p1Pieces[i];
+    		PieceController piece = Util.p1Pieces[i];
+    		if (card.attack != 0) piece.PlayCard(card);
+    	}
+		for (int i = 0; i < 5; i++) {
+			CardState card = p2Pieces[i];
+			PieceController piece = Util.p2Pieces[i];
+			if (card.attack != 0) piece.PlayCard(card);
+		}
     }
 }
