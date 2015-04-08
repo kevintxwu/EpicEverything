@@ -45,14 +45,15 @@ public class PieceAttackAnimation : MonoBehaviour {
     void OnMouseDown() {
 		if (!piece.usable) return;
 		if (piece.cardState != null && piece.Ready()) {
-			CreateArrow();
 			piece.attacking = true;
 			piece.ShowSelect();
+			CreateArrow();
 		}
     }
 
     void CreateArrow() {
         arrow = ArrowController.Create(transform.position);
+		arrow.UpdateTransform(Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
 
     IEnumerator AttackAfterSnap(PieceController other) {

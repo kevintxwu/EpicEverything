@@ -32,6 +32,11 @@ public class CardController : MonoBehaviour {
         gameObject.GetComponent<CardPlayAnimation>().Animate(piece, cardState.cost);
     }
 
+	public void PlaySpell() {
+		player.PlayCard(this);
+		selected = false;
+	}
+
 	public bool CanPlay() {
 		return player.playerState.gold >= cardState.cost;
 	}
@@ -88,10 +93,16 @@ public class CardController : MonoBehaviour {
     void Awake() {
         renderer.material = cardState.cardMaterial;
         mover = gameObject.GetComponent<MoveToTransform>();
-        transform.Find("Attack").GetComponent<TextMeshPro>().text = cardState.attack.ToString();
-        transform.Find("Health").GetComponent<TextMeshPro>().text = cardState.health.ToString();
-        transform.Find("Cost").GetComponent<TextMeshPro>().text = cardState.cost.ToString();
-        transform.Find("Time").GetComponent<TextMeshPro>().text = cardState.time.ToString();
+		if (!cardState.spell) {
+			transform.Find ("Attack").GetComponent<TextMeshPro> ().text = cardState.attack.ToString ();
+			transform.Find ("Health").GetComponent<TextMeshPro> ().text = cardState.health.ToString ();
+			transform.Find ("Time").GetComponent<TextMeshPro> ().text = cardState.time.ToString ();
+		} else {
+			transform.Find ("Attack").GetComponent<TextMeshPro> ().text = " ";
+			transform.Find ("Health").GetComponent<TextMeshPro> ().text = " ";
+			transform.Find ("Time").GetComponent<TextMeshPro> ().text = " ";
+		}
+		transform.Find("Cost").GetComponent<TextMeshPro>().text = cardState.cost.ToString();
         transform.Find("Name").GetComponent<TextMeshPro>().text = cardState.name.ToString();
         transform.Find("Effect").GetComponent<TextMeshPro>().text = cardState.effect.ToString();
         transform.Find("Type").GetComponent<TextMeshPro>().text = cardState.type.ToString();

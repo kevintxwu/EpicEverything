@@ -8,6 +8,10 @@ public class TurnTimerScript : MonoBehaviour {
     public float initDrawWait;
     public float turnWait;
 
+	public Texture2D cursorTexture;
+	public CursorMode cursorMode = CursorMode.Auto;
+	public Vector2 hotSpot = Vector2.zero;
+
     private GameController gameController;
     private int numStartingCards = 3;
 
@@ -17,6 +21,7 @@ public class TurnTimerScript : MonoBehaviour {
 		StartCoroutine(StartGameCountdown());
 //        StartCoroutine(DrawInitialCards());
 //        StartCoroutine(TurnTimer());
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 
 	IEnumerator StartGameCountdown() {
