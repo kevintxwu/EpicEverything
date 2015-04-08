@@ -2,27 +2,6 @@
 using System.Collections;
 using TMPro;
 
-[System.Serializable]
-public class CardState {
-    public int attack;
-    public int health;
-    public int time;
-    public int cost;
-    public bool ranged;
-    public bool block;
-    public bool speed;
-    public bool hidden;
-    public string name;
-    public string description;
-    public string effect;
-    public string type;
-
-    // temporary
-    public Material cardMaterial;
-    public Material pieceMaterial;
-    public string color;
-}
-
 public class CardController : MonoBehaviour {
 
     Quaternion baseRotation = Quaternion.Euler(270, 180, 0);

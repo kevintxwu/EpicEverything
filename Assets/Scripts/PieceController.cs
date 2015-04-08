@@ -30,8 +30,10 @@ public class PieceController : MonoBehaviour {
         this.cardState = cardState;
         lastAttackTime = Time.time;
         if (cardState.speed) lastAttackTime = Time.time - (cardState.time * Util.TimeScaleFactor);
-        attackObj.renderer.material = (Material) Resources.Load("attack_" + cardState.color, typeof(Material));
-        healthObj.renderer.material = (Material) Resources.Load("health_" + cardState.color, typeof(Material));
+		string attackPath = "materials/piece/attack/attack_" + cardState.color;
+		attackObj.renderer.material = (Material) Resources.Load(attackPath, typeof(Material));
+		string healthPath = "materials/piece/attack/health_" + cardState.color;
+		healthObj.renderer.material = (Material) Resources.Load(healthPath, typeof(Material));
 		color = cardState.color;
         UpdateCardHealth();
         UpdateCardAttack();

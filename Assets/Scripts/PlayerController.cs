@@ -6,7 +6,7 @@ using TMPro;
 [System.Serializable]
 public class PlayerState {
     public List<CardController> hand;
-    public List<CardState> deck;
+    public int deck;
     public int health;
     public int gold;
 	public int timer;
@@ -84,8 +84,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     protected void Init() {
-        Util.Shuffle(playerState.deck);
-        deckEnumerator = playerState.deck.GetEnumerator();
+		List<CardState> deck = Cards.decks[playerState.deck];
+        Util.Shuffle(deck);
+        deckEnumerator = deck.GetEnumerator();
         healthText = transform.Find("Health").GetComponent<TextMeshPro>();
         goldText = transform.Find("Gold").GetComponent<TextMeshPro>();
         timerText = transform.Find("Timer").GetComponent<TextMeshPro>();

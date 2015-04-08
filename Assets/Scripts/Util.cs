@@ -13,7 +13,7 @@ public static class Util {
     public static float RayDepth = 100;
     public static int PieceLayer = 1 << 8;
     public static float TimeScaleFactor = 0.5f;
-    
+
     public static List<PieceController> p1Pieces = new List<PieceController> {
     	GameObject.Find("Tile1a/Piece").GetComponent<PieceController>(),
 		GameObject.Find("Tile1b/Piece").GetComponent<PieceController>(),

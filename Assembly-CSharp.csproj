@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\CardController.cs" />
      <Compile Include="Assets\Scripts\CardPlayAnimation.cs" />
      <Compile Include="Assets\Scripts\CardPreviewAnimation.cs" />
+     <Compile Include="Assets\Scripts\Cards.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MoveCardWithMouse.cs" />
      <Compile Include="Assets\Scripts\MoveToTransform.cs" />
