@@ -119,6 +119,10 @@ public class CardController : MonoBehaviour {
 			transform.Find ("Attack").GetComponent<TextMeshPro> ().text = cardState.attack.ToString ();
 			transform.Find ("Health").GetComponent<TextMeshPro> ().text = cardState.health.ToString ();
 			transform.Find ("Time").GetComponent<TextMeshPro> ().text = cardState.time.ToString ();
+		} else {
+			transform.Find ("Attack").GetComponent<TextMeshPro> ().text = " ";
+			transform.Find ("Health").GetComponent<TextMeshPro> ().text = " ";
+			transform.Find ("Time").GetComponent<TextMeshPro> ().text = " ";
 		}
 		transform.Find("Cost").GetComponent<TextMeshPro>().text = cardState.cost.ToString();
         transform.Find("Name").GetComponent<TextMeshPro>().text = cardState.name.ToString();

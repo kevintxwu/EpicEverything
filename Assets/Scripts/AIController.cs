@@ -57,7 +57,7 @@ public class AIController : PlayerController {
                 playableCard.PlayCard(playablePiece);
             }
 			Util.Shuffle(pieces);
-			foreach (PieceController piece in pieces) {
+			/*foreach (PieceController piece in pieces) {
 				if (piece.Ready() && Randomize()) {
 					PieceController other = opponentPieces[Random.Range(0, opponentPieces.Count)];
 					if (piece.CanAttack(other)) {
@@ -73,7 +73,7 @@ public class AIController : PlayerController {
 						yield return new WaitForSeconds(1);
 					}
 				}
-			}
+			}*/
             yield return new WaitForSeconds(1);
         }
     }
